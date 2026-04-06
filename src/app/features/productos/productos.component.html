@@ -1,0 +1,514 @@
+<div class="min-h-screen bg-[#0F1117] px-4 py-8 sm:px-6 lg:px-8" style="font-family:'Nunito Sans',sans-serif;">
+
+  <!-- ═══════════════════════════════════════════
+       ERROR TOAST
+  ══════════════════════════════════════════════ -->
+  @if (error()) {
+    <div class="fixed top-5 right-5 z-50 flex items-start gap-3 bg-[#161B25] border border-red-600/40 rounded-xl px-4 py-3 shadow-2xl max-w-sm animate-slide-in">
+      <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+      </svg>
+      <p class="text-red-400 text-sm flex-1 leading-relaxed">{{ error() }}</p>
+      <button (click)="dismissError()" class="text-slate-500 hover:text-slate-300 transition-colors focus:outline-none ml-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════════ -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-red-600/15 border border-red-600/30 flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold text-white tracking-tight" style="font-family:'Rubik',sans-serif;">
+          Productos
+        </h1>
+        <p class="text-slate-500 text-sm leading-none mt-0.5">Catálogo de la tienda</p>
+      </div>
+      @if (!loading()) {
+        <span class="inline-flex items-center justify-center min-w-[2rem] h-6 px-2 rounded-full bg-[#2A3347] text-slate-300 text-xs font-semibold border border-[#2A3347]">
+          {{ filteredProductos().length }}
+        </span>
+      }
+    </div>
+
+    @if (isAdmin()) {
+      <button
+        (click)="openCreate()"
+        class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:ring-offset-2 focus:ring-offset-[#0F1117] shadow-lg"
+        style="box-shadow: 0 4px 15px rgba(220,38,38,0.25);">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        Nuevo Producto
+      </button>
+    }
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SEARCH + FILTER
+  ══════════════════════════════════════════════ -->
+  <div class="flex flex-col sm:flex-row gap-3 mb-7">
+    <!-- Search -->
+    <div class="relative flex-1">
+      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+      </div>
+      <input
+        type="text"
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+        placeholder="Buscar por nombre, marca o código…"
+        class="w-full bg-[#161B25] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl pl-10 pr-4 py-2.5 outline-none focus:border-red-600/50 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+      />
+    </div>
+    <!-- Category filter -->
+    <div class="relative sm:w-56">
+      <select
+        [ngModel]="selectedCategoria()"
+        (ngModelChange)="selectedCategoria.set($event)"
+        class="w-full appearance-none bg-[#161B25] border border-[#2A3347] text-slate-200 text-sm rounded-xl px-4 py-2.5 pr-9 outline-none focus:border-red-600/50 focus:ring-2 focus:ring-red-600/10 transition-all duration-200 cursor-pointer">
+        <option value="" class="bg-[#161B25]">Todas las categorías</option>
+        @for (cat of categorias(); track cat.id_categoria) {
+          <option [value]="cat.id_categoria" class="bg-[#161B25]">{{ cat.nombre }}</option>
+        }
+      </select>
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       LOADING SKELETONS
+  ══════════════════════════════════════════════ -->
+  @if (loading()) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      @for (item of skeletonItems; track $index) {
+        <div class="bg-[#161B25] border border-[#2A3347] rounded-2xl overflow-hidden animate-pulse">
+          <!-- Top bar -->
+          <div class="h-1.5 bg-[#2A3347]"></div>
+          <div class="p-5 space-y-3">
+            <div class="h-4 bg-[#2A3347] rounded-lg w-3/4"></div>
+            <div class="h-3 bg-[#2A3347] rounded-lg w-1/2"></div>
+            <div class="h-3 bg-[#2A3347] rounded-lg w-2/3"></div>
+            <div class="pt-2 flex items-center justify-between">
+              <div class="h-6 bg-[#2A3347] rounded-lg w-1/3"></div>
+              <div class="h-5 bg-[#2A3347] rounded-full w-16"></div>
+            </div>
+            <div class="h-5 bg-[#2A3347] rounded-full w-24"></div>
+            <div class="pt-2 h-9 bg-[#2A3347] rounded-xl w-full"></div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       EMPTY STATE
+  ══════════════════════════════════════════════ -->
+  @if (!loading() && filteredProductos().length === 0) {
+    <div class="flex flex-col items-center justify-center py-24 text-center">
+      <div class="w-20 h-20 rounded-2xl bg-[#161B25] border border-[#2A3347] flex items-center justify-center mb-5">
+        <svg class="w-10 h-10 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.3">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold text-slate-300 mb-1" style="font-family:'Rubik',sans-serif;">No hay productos</h3>
+      <p class="text-slate-500 text-sm max-w-xs">
+        @if (searchQuery() || selectedCategoria()) {
+          No se encontraron productos con los filtros aplicados.
+        } @else {
+          Aún no se han cargado productos al catálogo.
+        }
+      </p>
+      @if (isAdmin() && !searchQuery() && !selectedCategoria()) {
+        <button
+          (click)="openCreate()"
+          class="mt-5 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors duration-200 focus:outline-none">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          Crear primer producto
+        </button>
+      }
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCT GRID
+  ══════════════════════════════════════════════ -->
+  @if (!loading() && filteredProductos().length > 0) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      @for (producto of filteredProductos(); track producto.id_producto) {
+        <div class="group bg-[#161B25] border border-[#2A3347] rounded-2xl overflow-hidden hover:border-red-600/30 transition-all duration-300 hover:shadow-xl hover:shadow-black/30 flex flex-col">
+
+          <!-- Colored top accent bar -->
+          <div class="h-1 w-full"
+               [style.background]="'linear-gradient(90deg, ' + ('hsl(' + ((producto.categoria_id.charCodeAt(0) * 47) % 360) + ',55%,45%)') + ', ' + ('hsl(' + ((producto.categoria_id.charCodeAt(0) * 47 + 60) % 360) + ',55%,35%)') + ')'">
+          </div>
+
+          <div class="p-5 flex flex-col flex-1">
+            <!-- Name -->
+            <h3 class="text-white font-bold text-base leading-snug mb-1 line-clamp-2" style="font-family:'Rubik',sans-serif;">
+              {{ producto.nombre }}
+            </h3>
+
+            <!-- Brand + Code -->
+            <p class="text-slate-500 text-xs mb-1">
+              <span class="font-medium text-slate-400">{{ producto.marca }}</span>
+              <span class="mx-1 text-slate-600">·</span>
+              <span class="font-mono tracking-wider">{{ producto.codigo }}</span>
+            </p>
+
+            <!-- Type -->
+            @if (producto.tipo_producto) {
+              <p class="text-slate-600 text-xs mb-3">{{ producto.tipo_producto }}</p>
+            }
+
+            <!-- Price + Stock -->
+            <div class="flex items-center justify-between mt-auto pt-3 border-t border-[#2A3347]">
+              <span class="text-red-500 font-bold text-xl leading-none" style="font-family:'Rubik',sans-serif;">
+                ${{ (+(producto.precio ?? 0)).toFixed(2) }}
+              </span>
+
+              <!-- Stock badge -->
+              @if (!producto.stock || producto.stock === 0) {
+                <span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-red-600/15 text-red-400 border border-red-600/25">
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-500 inline-block"></span>
+                  Sin stock
+                </span>
+              } @else if (producto.stock <= 10) {
+                <span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 inline-block"></span>
+                  {{ producto.stock }} uds.
+                </span>
+              } @else {
+                <span class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                  {{ producto.stock }} uds.
+                </span>
+              }
+            </div>
+
+            <!-- Category badge -->
+            <div class="mt-2.5">
+              <span class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-[#0F1117] text-slate-400 border border-[#2A3347]">
+                <svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z" />
+                </svg>
+                {{ getCategoryName(producto.categoria_id) }}
+              </span>
+            </div>
+
+            <!-- ADMIN ACTIONS -->
+            @if (isAdmin()) {
+              <div class="flex gap-2 mt-4">
+                <button
+                  (click)="openEdit(producto)"
+                  title="Editar"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#0F1117] hover:bg-[#2A3347] border border-[#2A3347] hover:border-slate-500 text-slate-400 hover:text-white text-xs font-semibold py-2 rounded-xl transition-all duration-200 focus:outline-none">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                  </svg>
+                  Editar
+                </button>
+                <button
+                  (click)="confirmDelete(producto.id_producto)"
+                  title="Eliminar"
+                  class="inline-flex items-center justify-center w-9 h-9 bg-red-600/10 hover:bg-red-600/20 border border-red-600/20 hover:border-red-500/40 text-red-500 rounded-xl transition-all duration-200 focus:outline-none flex-shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                  </svg>
+                </button>
+              </div>
+            }
+
+            <!-- CLIENT: ADD TO CART -->
+            @if (!isAdmin()) {
+              <button
+                (click)="addToCart(producto)"
+                [disabled]="addingToCart() === producto.id_producto || !producto.stock || producto.stock === 0"
+                class="mt-4 w-full inline-flex items-center justify-center gap-2 text-sm font-semibold py-2.5 rounded-xl transition-all duration-200 focus:outline-none disabled:cursor-not-allowed"
+                [ngClass]="cartSuccess() === producto.id_producto
+                  ? 'bg-emerald-600/20 border border-emerald-500/30 text-emerald-400'
+                  : (!producto.stock || producto.stock === 0)
+                    ? 'bg-[#0F1117] border border-[#2A3347] text-slate-600 cursor-not-allowed'
+                    : 'bg-red-600 hover:bg-red-700 active:bg-red-800 text-white shadow-lg hover:shadow-red-600/20'">
+
+                @if (cartSuccess() === producto.id_producto) {
+                  <!-- Success state -->
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  Agregado
+                } @else if (addingToCart() === producto.id_producto) {
+                  <!-- Loading state -->
+                  <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Agregando…
+                } @else if (!producto.stock || producto.stock === 0) {
+                  Sin stock
+                } @else {
+                  <!-- Default state -->
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                  </svg>
+                  Agregar al carrito
+                }
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCT MODAL (CREATE / EDIT)
+  ══════════════════════════════════════════════ -->
+  @if (showModal()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style="background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);"
+      (click)="closeModal()">
+      <div
+        class="bg-[#161B25] border border-[#2A3347] rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden"
+        style="box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(42,51,71,0.5);"
+        (click)="$event.stopPropagation()">
+
+        <!-- Modal header -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-[#2A3347]">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-red-600/15 flex items-center justify-center">
+              @if (editingProducto()) {
+                <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                </svg>
+              } @else {
+                <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              }
+            </div>
+            <h2 class="text-white font-bold text-lg" style="font-family:'Rubik',sans-serif;">
+              {{ editingProducto() ? 'Editar Producto' : 'Nuevo Producto' }}
+            </h2>
+          </div>
+          <button
+            (click)="closeModal()"
+            class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-500 hover:text-white hover:bg-[#2A3347] transition-all duration-150 focus:outline-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="px-6 py-5 max-h-[70vh] overflow-y-auto custom-scrollbar">
+          <form [formGroup]="form" (ngSubmit)="save()" id="productoForm" novalidate class="space-y-4">
+
+            <!-- Nombre -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Nombre *</label>
+              <input type="text" formControlName="nombre" placeholder="Ej: Laptop Gaming Pro"
+                class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+                [class.border-red-500]="form.get('nombre')?.invalid && form.get('nombre')?.touched" />
+              @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+                <p class="mt-1 text-xs text-red-400">El nombre es obligatorio.</p>
+              }
+            </div>
+
+            <!-- Descripcion -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Descripción</label>
+              <textarea formControlName="descripcion" rows="2" placeholder="Descripción opcional…"
+                class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200 resize-none"></textarea>
+            </div>
+
+            <!-- Tipo + Codigo (2 cols) -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Tipo *</label>
+                <input type="text" formControlName="tipo_producto" placeholder="Ej: Electrónico"
+                  class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+                  [class.border-red-500]="form.get('tipo_producto')?.invalid && form.get('tipo_producto')?.touched" />
+                @if (form.get('tipo_producto')?.invalid && form.get('tipo_producto')?.touched) {
+                  <p class="mt-1 text-xs text-red-400">Requerido.</p>
+                }
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Código *</label>
+                <input type="text" formControlName="codigo" placeholder="Ej: LAP-001"
+                  class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200 font-mono"
+                  [class.border-red-500]="form.get('codigo')?.invalid && form.get('codigo')?.touched" />
+                @if (form.get('codigo')?.invalid && form.get('codigo')?.touched) {
+                  <p class="mt-1 text-xs text-red-400">Requerido.</p>
+                }
+              </div>
+            </div>
+
+            <!-- Marca -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Marca *</label>
+              <input type="text" formControlName="marca" placeholder="Ej: Dell, Samsung…"
+                class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+                [class.border-red-500]="form.get('marca')?.invalid && form.get('marca')?.touched" />
+              @if (form.get('marca')?.invalid && form.get('marca')?.touched) {
+                <p class="mt-1 text-xs text-red-400">La marca es obligatoria.</p>
+              }
+            </div>
+
+            <!-- Precio + Stock (2 cols) -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Precio *</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500 text-sm pointer-events-none">$</span>
+                  <input type="number" formControlName="precio" placeholder="0.00" min="0.01" step="0.01"
+                    class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl pl-7 pr-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+                    [class.border-red-500]="form.get('precio')?.invalid && form.get('precio')?.touched" />
+                </div>
+                @if (form.get('precio')?.invalid && form.get('precio')?.touched) {
+                  <p class="mt-1 text-xs text-red-400">Precio mínimo: $0.01</p>
+                }
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Stock *</label>
+                <input type="number" formControlName="stock" placeholder="0" min="0"
+                  class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+                  [class.border-red-500]="form.get('stock')?.invalid && form.get('stock')?.touched" />
+                @if (form.get('stock')?.invalid && form.get('stock')?.touched) {
+                  <p class="mt-1 text-xs text-red-400">Stock mínimo: 0</p>
+                }
+              </div>
+            </div>
+
+            <!-- Categoría -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">Categoría *</label>
+              <div class="relative">
+                <select formControlName="categoria_id"
+                  class="w-full appearance-none bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm rounded-xl px-4 py-2.5 pr-9 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200 cursor-pointer"
+                  [class.border-red-500]="form.get('categoria_id')?.invalid && form.get('categoria_id')?.touched">
+                  <option value="" class="bg-[#0F1117]">Seleccionar categoría…</option>
+                  @for (cat of categorias(); track cat.id_categoria) {
+                    <option [value]="cat.id_categoria" class="bg-[#0F1117]">{{ cat.nombre }}</option>
+                  }
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </div>
+              </div>
+              @if (form.get('categoria_id')?.invalid && form.get('categoria_id')?.touched) {
+                <p class="mt-1 text-xs text-red-400">Selecciona una categoría.</p>
+              }
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#2A3347] bg-[#0F1117]/40">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="px-4 py-2.5 text-sm font-semibold text-slate-400 hover:text-white bg-[#0F1117] hover:bg-[#2A3347] border border-[#2A3347] rounded-xl transition-all duration-200 focus:outline-none">
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            form="productoForm"
+            (click)="save()"
+            [disabled]="form.invalid"
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            style="box-shadow: 0 4px 15px rgba(220,38,38,0.25);">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            {{ editingProducto() ? 'Guardar cambios' : 'Crear producto' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- ═══════════════════════════════════════════
+       DELETE CONFIRMATION MODAL
+  ══════════════════════════════════════════════ -->
+  @if (deleteConfirm()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style="background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);"
+      (click)="cancelDelete()">
+      <div
+        class="bg-[#161B25] border border-[#2A3347] rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden"
+        style="box-shadow: 0 25px 60px rgba(0,0,0,0.6);"
+        (click)="$event.stopPropagation()">
+
+        <div class="px-6 pt-6 pb-2 flex flex-col items-center text-center">
+          <div class="w-14 h-14 rounded-full bg-red-600/15 border border-red-600/25 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+            </svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-1" style="font-family:'Rubik',sans-serif;">Eliminar producto</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            ¿Estás seguro? Esta acción no se puede deshacer.
+          </p>
+        </div>
+
+        <div class="flex gap-3 px-6 py-5">
+          <button
+            (click)="cancelDelete()"
+            class="flex-1 py-2.5 text-sm font-semibold text-slate-400 hover:text-white bg-[#0F1117] hover:bg-[#2A3347] border border-[#2A3347] rounded-xl transition-all duration-200 focus:outline-none">
+            Cancelar
+          </button>
+          <button
+            (click)="doDelete(deleteConfirm()!)"
+            class="flex-1 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded-xl transition-all duration-200 focus:outline-none shadow-lg"
+            style="box-shadow: 0 4px 15px rgba(220,38,38,0.25);">
+            Sí, eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #2A3347; border-radius: 10px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3d4f6e; }
+
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(1rem); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .animate-slide-in { animation: slide-in 0.25s ease-out forwards; }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,272 @@
+<!-- ============================================================
+     DESCUENTOS — Admin panel, card layout, dark theme
+     ============================================================ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap');
+  :root {
+    --bg:#0F1117;--surface:#161B25;--surface2:#1C2333;--border:#2A3347;
+    --red:#DC2626;--red-h:#B91C1C;--text:#E2E8F0;--muted:#64748B;--soft:#94A3B8;
+  }
+  .desc-page { font-family:'Nunito Sans',sans-serif;color:var(--text);min-height:100%; }
+  .desc-page h1,.desc-page h2,.desc-page h3,.desc-page h4 { font-family:'Rubik',sans-serif; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes scaleIn { from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
+  .anim-up{animation:fadeUp .4s cubic-bezier(.4,0,.2,1) both}
+  .anim-in{animation:fadeIn .3s ease both}
+  .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}
+  .skel{background:linear-gradient(90deg,#1C2333 25%,#222b3a 50%,#1C2333 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
+  @keyframes shimmer{to{background-position:-200% 0}}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;}
+  .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;max-width:480px;width:100%;animation:scaleIn .3s cubic-bezier(.4,0,.2,1) both;max-height:90vh;overflow-y:auto;}
+  .badge{display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;line-height:20px;}
+  .badge-green{background:rgba(34,197,94,.15);color:#86EFAC;}
+  .badge-amber{background:rgba(245,158,11,.15);color:#FCD34D;}
+  .badge-red{background:rgba(220,38,38,.15);color:#F87171;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;transition:border-color .2s,transform .2s;}
+  .card:hover{transform:translateY(-2px);}
+  .card-green{border-left:3px solid #22C55E;}
+  .card-amber{border-left:3px solid #F59E0B;}
+  .card-red{border-left:3px solid #DC2626;}
+  .pct-badge-green{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#4ADE80;}
+  .pct-badge-amber{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:#FCD34D;}
+  .pct-badge-red{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);color:#F87171;}
+  .form-label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px;}
+  .form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;box-sizing:border-box;}
+  .form-input:focus{border-color:#3B82F6;}
+  .form-input.is-invalid{border-color:rgba(220,38,38,.6);}
+  .btn-primary{background:var(--red);color:#fff;padding:10px 22px;border-radius:10px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:background .2s;font-family:'Nunito Sans',sans-serif;}
+  .btn-primary:hover{background:var(--red-h);}
+  .btn-ghost{background:transparent;color:var(--soft);padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:'Nunito Sans',sans-serif;}
+  .btn-ghost:hover{background:var(--surface2);color:var(--text);}
+  .btn-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .2s;}
+  .btn-icon:hover{background:var(--surface2);}
+  .btn-icon-red:hover{background:rgba(220,38,38,.12);border-color:rgba(220,38,38,.35);color:#F87171;}
+  .btn-icon-blue:hover{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);color:#93C5FD;}
+  .preview-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:12px;}
+  .ladder-step{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;position:relative;}
+  .ladder-connector{width:2px;height:16px;background:linear-gradient(var(--border),transparent);margin:0 auto;}
+</style>
+
+<div class="desc-page" style="background:var(--bg);padding:32px;min-height:100vh;">
+
+  <!-- Header -->
+  <div class="anim-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px;">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div style="width:44px;height:44px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <div>
+        <h1 style="font-size:22px;font-weight:700;color:var(--text);margin:0;">Descuentos</h1>
+        <p style="font-size:13px;color:var(--muted);margin:0;">Reglas de descuento por volumen</p>
+      </div>
+    </div>
+    <button class="btn-primary" (click)="openCreate()">
+      <span style="display:flex;align-items:center;gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nuevo Descuento
+      </span>
+    </button>
+  </div>
+
+  <!-- Error -->
+  @if (error()) {
+    <div class="anim-in" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:10px;padding:14px 18px;margin-bottom:20px;color:#F87171;font-size:14px;display:flex;align-items:center;gap:10px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      {{ error() }}
+    </div>
+  }
+
+  <!-- Loading skeletons -->
+  @if (loading()) {
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+      @for (i of [1,2,3]; track i) {
+        <div class="skel" style="height:160px;"></div>
+      }
+    </div>
+  }
+
+  <!-- Cards -->
+  @if (!loading()) {
+    @if (descuentos().length === 0) {
+      <!-- Empty state -->
+      <div class="anim-up" style="text-align:center;padding:72px 24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;">
+        <div style="width:64px;height:64px;background:rgba(100,116,139,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <p style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;">Sin reglas de descuento</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Crea tu primera regla de descuento por volumen</p>
+        <button class="btn-primary" (click)="openCreate()">Crear descuento</button>
+      </div>
+    } @else {
+      <!-- Discount ladder -->
+      <div class="anim-up d1" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:28px;">
+        <h3 style="font-size:14px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.06em;margin:0 0 16px;">Escala de descuentos</h3>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          @for (d of sortedDescuentos(); track d.id_descuento; let last = $last) {
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+                <div [style.background]="discountColor(d.porcentaje) === 'green' ? 'rgba(34,197,94,.15)' : discountColor(d.porcentaje) === 'amber' ? 'rgba(245,158,11,.15)' : 'rgba(220,38,38,.15)'"
+                  [style.border]="'1px solid ' + (discountColor(d.porcentaje) === 'green' ? 'rgba(34,197,94,.3)' : discountColor(d.porcentaje) === 'amber' ? 'rgba(245,158,11,.3)' : 'rgba(220,38,38,.3)')"
+                  style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    [style.stroke]="discountColor(d.porcentaje) === 'green' ? '#4ADE80' : discountColor(d.porcentaje) === 'amber' ? '#FCD34D' : '#F87171'"
+                    stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                @if (!last) {
+                  <div style="width:2px;height:20px;background:var(--border);margin:3px 0;"></div>
+                }
+              </div>
+              <div class="ladder-step" style="flex:1;margin-bottom:0;">
+                <div style="flex:1;">
+                  <span style="font-size:13px;font-weight:600;color:var(--text);">{{ d.unidades_minimas }}+ unidades</span>
+                  <span style="font-size:12px;color:var(--muted);margin-left:8px;">— {{ d.descripcion }}</span>
+                </div>
+                <span [class]="'badge ' + (discountColor(d.porcentaje) === 'green' ? 'badge-green' : discountColor(d.porcentaje) === 'amber' ? 'badge-amber' : 'badge-red')"
+                  style="font-size:14px;padding:4px 12px;">
+                  -{{ d.porcentaje }}%
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Cards grid -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+        @for (d of sortedDescuentos(); track d.id_descuento; let i = $index) {
+          <div class="card anim-up" [class]="'card card-' + discountColor(d.porcentaje)"
+            [style.animation-delay]="(i * 0.06) + 's'">
+            <!-- Top row -->
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;">
+              <div [class]="'pct-badge-' + discountColor(d.porcentaje)"
+                style="border-radius:12px;padding:8px 16px;text-align:center;">
+                <div style="font-family:'Rubik',sans-serif;font-size:28px;font-weight:800;line-height:1;">{{ d.porcentaje }}%</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;opacity:.7;margin-top:2px;">DESCUENTO</div>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button class="btn-icon btn-icon-blue" style="color:var(--soft);" (click)="openEdit(d)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="btn-icon btn-icon-red" style="color:var(--soft);" (click)="confirmDelete(d.id_descuento)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                </button>
+              </div>
+            </div>
+            <!-- Info -->
+            <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 8px;">{{ d.descripcion }}</p>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              <span style="font-size:12px;color:var(--muted);">Mínimo <strong style="color:var(--soft);">{{ d.unidades_minimas }}</strong> unidades</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+
+</div>
+
+<!-- Modal: Crear / Editar -->
+@if (showModal()) {
+  <div class="modal-backdrop anim-in" (click)="closeModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:44px;height:44px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <h2 style="font-size:18px;font-weight:700;margin:0;color:var(--text);">
+            @if (editing()) { Editar Descuento } @else { Nuevo Descuento }
+          </h2>
+          <p style="font-size:13px;color:var(--muted);margin:3px 0 0;">Configura la regla de descuento por volumen</p>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <!-- Descripcion -->
+        <div style="margin-bottom:18px;">
+          <label class="form-label">Descripción</label>
+          <input class="form-input" [class.is-invalid]="form.get('descripcion')?.invalid && form.get('descripcion')?.touched"
+            type="text" formControlName="descripcion" placeholder="Ej: Descuento por docena" />
+          @if (form.get('descripcion')?.invalid && form.get('descripcion')?.touched) {
+            <p style="font-size:11px;color:#F87171;margin:4px 0 0;">La descripción es requerida</p>
+          }
+        </div>
+
+        <!-- Two columns -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+          <div>
+            <label class="form-label">Unidades mínimas</label>
+            <input class="form-input" [class.is-invalid]="form.get('unidades_minimas')?.invalid && form.get('unidades_minimas')?.touched"
+              type="number" formControlName="unidades_minimas" placeholder="1" min="1" />
+            @if (form.get('unidades_minimas')?.invalid && form.get('unidades_minimas')?.touched) {
+              <p style="font-size:11px;color:#F87171;margin:4px 0 0;">Mínimo 1 unidad</p>
+            }
+          </div>
+          <div>
+            <label class="form-label">Porcentaje (%)</label>
+            <input class="form-input" [class.is-invalid]="form.get('porcentaje')?.invalid && form.get('porcentaje')?.touched"
+              type="number" formControlName="porcentaje" placeholder="5" min="1" max="100" />
+            @if (form.get('porcentaje')?.invalid && form.get('porcentaje')?.touched) {
+              <p style="font-size:11px;color:#F87171;margin:4px 0 0;">Entre 1 y 100</p>
+            }
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        @if (form.get('descripcion')?.value || form.get('unidades_minimas')?.value) {
+          <div class="preview-box" style="margin-bottom:20px;">
+            <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 10px;">Vista previa</p>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div [style.background]="previewBg()"
+                [style.border]="previewBorder()"
+                style="border-radius:10px;padding:8px 14px;text-align:center;flex-shrink:0;">
+                <div [style.color]="previewColor()"
+                  style="font-family:'Rubik',sans-serif;font-size:22px;font-weight:800;line-height:1;">
+                  {{ form.get('porcentaje')?.value || 0 }}%
+                </div>
+                <div style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:2px;">OFF</div>
+              </div>
+              <div>
+                <p style="font-size:13px;font-weight:600;color:var(--text);margin:0 0 2px;">{{ form.get('descripcion')?.value || 'Sin nombre' }}</p>
+                <p style="font-size:12px;color:var(--muted);margin:0;">Comprando <strong style="color:var(--soft);">{{ form.get('unidades_minimas')?.value || 0 }}</strong> o más unidades</p>
+              </div>
+            </div>
+          </div>
+        }
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button type="button" class="btn-ghost" (click)="closeModal()">Cancelar</button>
+          <button type="submit" class="btn-primary" [disabled]="form.invalid">
+            @if (editing()) { Guardar cambios } @else { Crear descuento }
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+<!-- Modal: Confirmar Eliminar -->
+@if (deleteConfirm()) {
+  <div class="modal-backdrop anim-in" (click)="cancelDelete()">
+    <div class="modal-box" (click)="$event.stopPropagation()" style="max-width:400px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <div style="width:44px;height:44px;background:rgba(220,38,38,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </div>
+        <div>
+          <h3 style="font-size:16px;font-weight:700;margin:0;color:var(--text);">Eliminar descuento</h3>
+          <p style="font-size:13px;color:var(--muted);margin:3px 0 0;">Esta acción es irreversible</p>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--soft);margin-bottom:20px;">¿Confirmas que deseas eliminar esta regla de descuento? Los carritos activos podrían verse afectados.</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end;">
+        <button class="btn-ghost" (click)="cancelDelete()">Cancelar</button>
+        <button class="btn-primary" (click)="doDelete(deleteConfirm()!)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+}

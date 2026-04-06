@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background-color: #0F1117;
+  color: #F1F5F9;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rubik', sans-serif;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #161B25; }
+::-webkit-scrollbar-thumb { background: #2A3347; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #DC2626; }
+
+@layer components {
+  .btn-primary {
+    @apply bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer;
+  }
+  .btn-primary:disabled { @apply opacity-50 cursor-not-allowed; }
+
+  .btn-secondary {
+    @apply bg-[#1E2433] hover:bg-[#252D3D] text-slate-200 border border-[#2A3347] font-semibold px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer;
+  }
+
+  .btn-danger {
+    @apply bg-red-600/10 hover:bg-red-600/20 text-red-400 border border-red-600/30 font-semibold px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer;
+  }
+
+  .card {
+    @apply bg-[#161B25] border border-[#2A3347] rounded-xl;
+  }
+
+  .input-field {
+    @apply w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 placeholder-slate-500 rounded-lg px-4 py-2.5 outline-none transition-all duration-200;
+  }
+  .input-field:focus {
+    @apply border-red-500;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+  }
+
+  .badge-admin {
+    background-color: rgba(220,38,38,0.2);
+    color: #F87171;
+    border: 1px solid rgba(220,38,38,0.3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+
+  .badge-cliente {
+    background-color: rgba(59,130,246,0.2);
+    color: #60A5FA;
+    border: 1px solid rgba(59,130,246,0.3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+
+  .badge-success {
+    background-color: rgba(16,185,129,0.2);
+    color: #34D399;
+    border: 1px solid rgba(16,185,129,0.3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+
+  .badge-warning {
+    background-color: rgba(245,158,11,0.2);
+    color: #FCD34D;
+    border: 1px solid rgba(245,158,11,0.3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+
+  .badge-danger {
+    background-color: rgba(239,68,68,0.2);
+    color: #F87171;
+    border: 1px solid rgba(239,68,68,0.3);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+.animate-slide-in { animation: slideIn 0.2s ease-out forwards; }
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2A3347;
+  border-top-color: #DC2626;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
