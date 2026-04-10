@@ -1,5 +1,5 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
-import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FacturaService } from '../../../core/services/factura.service';
 import { Factura } from '../../../core/models';
@@ -7,7 +7,7 @@ import { Factura } from '../../../core/models';
 @Component({
   selector: 'app-factura-detalle',
   standalone: true,
-  imports: [CommonModule, RouterLink, DatePipe, CurrencyPipe],
+  imports: [CommonModule, RouterLink, DatePipe],
   templateUrl: './factura-detalle.component.html',
 })
 export class FacturaDetalleComponent implements OnInit {

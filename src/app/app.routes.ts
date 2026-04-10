@@ -54,6 +54,11 @@ export const routes: Routes = [
         loadComponent: () => import('./features/descuentos/descuentos.component').then(m => m.DescuentosComponent),
       },
       {
+        path: 'gestion-compras',
+        canActivate: [adminGuard],
+        loadComponent: () => import('./features/gestion-compras/gestion-compras.component').then(m => m.GestionComprasComponent),
+      },
+      {
         path: 'perfil',
         loadComponent: () => import('./features/perfil/perfil.component').then(m => m.PerfilComponent),
       },

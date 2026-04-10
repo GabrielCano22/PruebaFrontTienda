@@ -27,7 +27,7 @@ export class CarritoComponent implements OnInit {
   error = signal('');
 
   totalBruto = computed(() => {
-    return this.carrito()?.detalles?.reduce((sum, d) => sum + (d.precio_unitario * d.cantidad), 0) ?? 0;
+    return this.carrito()?.detalles?.reduce((sum, d) => sum + (Number(d.precio_unitario) * d.cantidad), 0) ?? 0;
   });
 
   totalItems = computed(() => {
@@ -50,7 +50,7 @@ export class CarritoComponent implements OnInit {
     const bruto = this.totalBruto();
     const desc = this.descuentoAplicable();
     if (!desc) return bruto;
-    return bruto * (1 - desc.porcentaje / 100);
+    return bruto * (1 - Number(desc.porcentaje) / 100);
   });
 
   ahorro = computed(() => {

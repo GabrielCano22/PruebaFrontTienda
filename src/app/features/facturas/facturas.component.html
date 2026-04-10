@@ -142,12 +142,12 @@
               <div style="flex:1;min-width:200px;">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
                   <span style="font-family:monospace;font-size:13px;font-weight:700;color:var(--text);background:var(--surface2);border:1px solid var(--border);padding:3px 10px;border-radius:6px;">#{{ shortId(f.id_factura) }}</span>
-                  @if (f.estado === 'pagado') {
-                    <span class="badge badge-green">Pagado</span>
+                  @if (f.estado === 'pagado' || f.estado === 'pagada') {
+                    <span class="badge badge-green">Aprobada</span>
                   } @else if (f.estado === 'pendiente') {
                     <span class="badge badge-amber">Pendiente</span>
                   } @else {
-                    <span class="badge badge-red">Cancelado</span>
+                    <span class="badge badge-red">Rechazada</span>
                   }
                 </div>
                 <p style="font-size:13px;color:var(--muted);margin:0 0 8px;">
@@ -166,7 +166,7 @@
                   <span style="font-size:12px;color:var(--muted);">Subtotal</span>
                   <span style="font-size:13px;color:var(--soft);text-decoration:line-through;">${{ f.total_bruto | number:'1.2-2' }}</span>
                 </div>
-                @if (f.porcentaje_descuento > 0) {
+                @if (+f.porcentaje_descuento > 0) {
                   <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:8px;">
                     <span style="font-size:12px;color:#4ADE80;">Descuento {{ f.porcentaje_descuento }}%</span>
                     <span style="font-size:12px;color:#4ADE80;font-weight:600;">-${{ f.total_descuento | number:'1.2-2' }}</span>

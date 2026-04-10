@@ -100,12 +100,12 @@
             </div>
             <div style="display:flex;align-items:center;gap:10px;">
               <code style="font-size:13px;font-weight:700;color:var(--soft);background:var(--surface2);padding:4px 10px;border-radius:6px;border:1px solid var(--border);">#{{ shortId(factura()!.id_factura) }}</code>
-              @if (factura()!.estado === 'pagado') {
-                <span class="badge badge-green">Pagado</span>
+              @if (factura()!.estado === 'pagado' || factura()!.estado === 'pagada') {
+                <span class="badge badge-green">Aprobada</span>
               } @else if (factura()!.estado === 'pendiente') {
                 <span class="badge badge-amber">Pendiente</span>
               } @else {
-                <span class="badge badge-red">Cancelado</span>
+                <span class="badge badge-red">Rechazada</span>
               }
             </div>
           </div>
@@ -161,7 +161,7 @@
             <span style="font-size:14px;font-weight:600;color:var(--text);">${{ factura()!.total_bruto | number:'1.2-2' }}</span>
           </div>
 
-          @if (factura()!.porcentaje_descuento > 0) {
+          @if (+factura()!.porcentaje_descuento > 0) {
             <div class="summary-row">
               <div style="display:flex;align-items:center;gap:8px;">
                 <span style="font-size:14px;color:#4ADE80;">Descuento</span>

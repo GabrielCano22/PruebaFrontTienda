@@ -169,7 +169,7 @@
               </div>
               <!-- Subtotal -->
               <div style="text-align:right;flex-shrink:0;min-width:80px;">
-                <p style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:0;">${{ (detalle.precio_unitario * detalle.cantidad) | number:'1.2-2' }}</p>
+                <p style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:0;">${{ (+detalle.precio_unitario * detalle.cantidad) | number:'1.2-2' }}</p>
               </div>
               <!-- Remove -->
               <button class="qty-btn qty-btn-remove" style="color:var(--muted);" (click)="quitar(detalle)" aria-label="Eliminar">

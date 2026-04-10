@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, inject, computed } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+
 import { AuthService } from '../../core/services/auth.service';
 import { ProductoService } from '../../core/services/producto.service';
 import { CategoriaService } from '../../core/services/categoria.service';
@@ -11,7 +11,7 @@ import { Producto, Categoria } from '../../core/models';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, NgClass, ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [CommonModule, NgClass, ReactiveFormsModule, FormsModule],
   templateUrl: './productos.component.html',
 })
 export class ProductosComponent implements OnInit {

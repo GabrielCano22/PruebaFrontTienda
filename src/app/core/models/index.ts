@@ -148,7 +148,7 @@ export interface Factura {
   porcentaje_descuento: number;
   total_descuento: number;
   total_neto: number;
-  estado: 'pendiente' | 'pagado' | 'cancelado';
+  estado: string;
   fecha_creacion: string;
   detalles?: DetalleFactura[];
 }

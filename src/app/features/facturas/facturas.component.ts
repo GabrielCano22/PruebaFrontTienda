@@ -1,38 +1,39 @@
-import { Component, OnInit, signal, inject, computed } from '@angular/core';
-import { CommonModule, DatePipe, CurrencyPipe } from '@angular/common';
+import { Component, OnInit, inject, computed, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FacturaService } from '../../core/services/factura.service';
-import { Factura } from '../../core/models';
 
 @Component({
   selector: 'app-facturas',
   standalone: true,
-  imports: [CommonModule, RouterLink, DatePipe, CurrencyPipe],
+  imports: [CommonModule, RouterLink, DatePipe],
   templateUrl: './facturas.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FacturasComponent implements OnInit {
-  auth = inject(AuthService);
-  facturaService = inject(FacturaService);
-  facturas = signal<Factura[]>([]);
-  loading = signal(true);
-  error = signal('');
+  private auth = inject(AuthService);
+  private facturaService = inject(FacturaService);
+
+  // Consume signals directly from the service — no local duplication
+  facturas = this.facturaService.facturas;
+  loading = this.facturaService.loading;
+  error = this.facturaService.error;
 
   totalGastado = computed(() =>
-    this.facturas().reduce((sum, f) => sum + f.total_neto, 0)
+    this.facturas().reduce((sum, f) => sum + Number(f.total_neto), 0)
   );
 
   totalAhorrado = computed(() =>
-    this.facturas().reduce((sum, f) => sum + f.total_descuento, 0)
+    this.facturas().reduce((sum, f) => sum + Number(f.total_descuento), 0)
   );
 
   ngOnInit() {
     const userId = this.auth.getUserId();
     if (userId) {
-      this.facturaService.getMisFacturas(userId).subscribe({
-        next: f => { this.facturas.set(f); this.loading.set(false); },
-        error: () => { this.error.set('Error al cargar'); this.loading.set(false); }
-      });
+      // If prefetch already loaded data, this returns immediately.
+      // Otherwise it triggers a fetch.
+      this.facturaService.getMisFacturas(userId);
     }
   }
 
@@ -42,9 +43,9 @@ export class FacturasComponent implements OnInit {
 
   estadoColor(estado: string): string {
     switch (estado) {
-      case 'pagado': return 'green';
+      case 'pagado': case 'pagada': return 'green';
       case 'pendiente': return 'amber';
-      case 'cancelado': return 'red';
+      case 'cancelado': case 'anulada': return 'red';
       default: return 'gray';
     }
   }

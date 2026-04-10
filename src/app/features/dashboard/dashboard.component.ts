@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   isAdmin = this.auth.isAdmin;
 
   stats = signal({ productos: 0, categorias: 0, usuarios: 0, descuentos: 0 });
-  misFacturas = signal<any[]>([]);
+  misFacturas = this.facturaService.facturas;
   tiendaNombre = signal('La Tienda');
   loading = signal(true);
 
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
       this.categoriaService.getAll().subscribe({ next: c => this.stats.update(s => ({ ...s, categorias: c.length })), error: () => {} });
       const userId = this.auth.getUserId();
       if (userId) {
-        this.facturaService.getMisFacturas(userId).subscribe({ next: f => this.misFacturas.set(f), error: () => {} });
+        this.facturaService.getMisFacturas(userId);
       }
     }
     this.loading.set(false);
