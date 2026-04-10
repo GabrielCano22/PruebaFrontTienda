@@ -1,20 +1,41 @@
 <!-- ============================================================
      DASHBOARD — La Tienda de Gerardo
-     Admin + Cliente views, dark theme, inline styles
+     Admin + Cliente views, dark navy theme, inline styles
      ============================================================ -->
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
 
   .db-root {
-    font-family: 'Nunito Sans', sans-serif;
-    color: #F1F5F9;
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    color: #F0F4F8;
     min-height: 100%;
   }
 
-  /* ── Welcome banner ── */
+  /* ── Keyframes ── */
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+    to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  @keyframes db-spin { to { transform: rotate(360deg); } }
+
+  @keyframes floatParticle {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+    50%      { transform: translateY(-12px) scale(1.2); opacity: 0.7; }
+  }
+
+  /* ── Welcome banner — Admin ── */
   .db-banner-admin {
-    background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+    background: linear-gradient(135deg, #D7263D 0%, #9F1629 25%, #7F1D2B 50%, #D7263D 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
     border-radius: 16px;
     padding: 32px 36px;
     display: flex;
@@ -24,7 +45,8 @@
     margin-bottom: 28px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(220,38,38,0.25);
+    box-shadow: 0 8px 32px rgba(215,38,61,0.25);
+    animation: gradientShift 8s ease infinite, revealUp 0.6s ease both;
   }
   .db-banner-admin::before {
     content: '';
@@ -38,15 +60,22 @@
   .db-banner-admin::after {
     content: '';
     position: absolute;
-    bottom: -60px; left: 40%;
-    width: 260px; height: 260px;
-    background: rgba(0,0,0,0.08);
-    border-radius: 50%;
+    inset: 0;
+    background-image:
+      radial-gradient(circle 2px at 15% 25%, rgba(255,255,255,0.35) 1px, transparent 2px),
+      radial-gradient(circle 2px at 75% 65%, rgba(255,255,255,0.3) 1px, transparent 2px),
+      radial-gradient(circle 1.5px at 45% 80%, rgba(255,255,255,0.25) 1px, transparent 2px),
+      radial-gradient(circle 2px at 85% 20%, rgba(255,255,255,0.3) 1px, transparent 2px),
+      radial-gradient(circle 1.5px at 30% 55%, rgba(255,255,255,0.2) 1px, transparent 2px),
+      radial-gradient(circle 2px at 60% 35%, rgba(255,255,255,0.28) 1px, transparent 2px);
     pointer-events: none;
+    animation: floatParticle 6s ease-in-out infinite;
   }
 
   .db-banner-cliente {
-    background: linear-gradient(135deg, #1E3A5F 0%, #162032 100%);
+    background: linear-gradient(135deg, #041E35 0%, #0A2A44 50%, #071F37 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite, revealUp 0.6s ease both;
     border-radius: 16px;
     padding: 32px 36px;
     display: flex;
@@ -57,7 +86,7 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(59,130,246,0.2);
-    box-shadow: 0 8px 32px rgba(30,58,95,0.35);
+    box-shadow: 0 8px 32px rgba(2,24,43,0.5);
   }
   .db-banner-cliente::before {
     content: '';
@@ -68,10 +97,22 @@
     border-radius: 50%;
     pointer-events: none;
   }
+  .db-banner-cliente::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle 2px at 20% 30%, rgba(59,130,246,0.25) 1px, transparent 2px),
+      radial-gradient(circle 2px at 70% 60%, rgba(59,130,246,0.2) 1px, transparent 2px),
+      radial-gradient(circle 1.5px at 50% 75%, rgba(59,130,246,0.15) 1px, transparent 2px),
+      radial-gradient(circle 2px at 80% 25%, rgba(59,130,246,0.2) 1px, transparent 2px);
+    pointer-events: none;
+    animation: floatParticle 6s ease-in-out infinite;
+  }
 
   .db-banner-text { position: relative; z-index: 1; }
   .db-banner-greeting {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', system-ui, sans-serif;
     font-size: 26px; font-weight: 700;
     color: #fff;
     line-height: 1.25;
@@ -92,63 +133,90 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-bottom: 28px;
+    animation: revealUp 0.6s ease both;
+    animation-delay: 0.1s;
   }
   .db-stats-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 28px;
+    animation: revealUp 0.6s ease both;
+    animation-delay: 0.1s;
   }
 
   .db-stat-card {
-    background: #161B25;
-    border: 1px solid #2A3347;
+    background: rgba(7,31,55,0.6);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(30,90,138,0.2);
     border-radius: 14px;
     padding: 22px 20px;
     display: flex;
     align-items: center;
     gap: 16px;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .db-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #D7263D, #3B82F6);
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: 14px 14px 0 0;
   }
   .db-stat-card:hover {
-    border-color: #3D4F6E;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    transform: translateY(-1px);
+    border-color: rgba(30,90,138,0.45);
+    box-shadow: 0 4px 20px rgba(2,24,43,0.5);
+    transform: translateY(-3px);
+  }
+  .db-stat-card:hover::before {
+    opacity: 1;
+  }
+  .db-stat-card:hover .db-stat-icon {
+    transform: scale(1.1) rotate(-3deg);
   }
   .db-stat-icon {
     width: 46px; height: 46px;
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
+    transition: transform 0.25s ease;
   }
-  .db-stat-icon-red   { background: rgba(220,38,38,0.12);  border: 1px solid rgba(220,38,38,0.25); }
+  .db-stat-icon-red   { background: rgba(215,38,61,0.12);  border: 1px solid rgba(215,38,61,0.25); }
   .db-stat-icon-amber { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25); }
   .db-stat-icon-blue  { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25); }
   .db-stat-icon-green { background: rgba(34,197,94,0.12);  border: 1px solid rgba(34,197,94,0.25); }
 
   .db-stat-body {}
   .db-stat-num {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'JetBrains Mono', 'Rubik', monospace;
     font-size: 28px; font-weight: 700;
-    color: #F1F5F9;
+    color: #F0F4F8;
     line-height: 1;
     margin-bottom: 4px;
   }
   .db-stat-label {
     font-size: 12px; font-weight: 600;
-    color: #64748B;
+    color: #5E81A4;
     letter-spacing: 0.02em;
     text-transform: uppercase;
   }
 
   /* ── Section header ── */
   .db-section-title {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', system-ui, sans-serif;
     font-size: 11px; font-weight: 700;
     letter-spacing: 0.1em;
-    color: #4A5568;
+    color: #5E81A4;
     text-transform: uppercase;
     margin-bottom: 14px;
+    animation: revealUp 0.6s ease both;
+    animation-delay: 0.2s;
   }
 
   /* ── Quick access cards ── */
@@ -157,31 +225,35 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     margin-bottom: 28px;
+    animation: revealUp 0.6s ease both;
+    animation-delay: 0.25s;
   }
   .db-quick-grid-2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     margin-bottom: 28px;
+    animation: revealUp 0.6s ease both;
+    animation-delay: 0.25s;
   }
 
   .db-quick-card {
-    background: #161B25;
-    border: 1px solid #2A3347;
+    background: #071F37;
+    border: 1px solid #164063;
     border-radius: 14px;
     padding: 22px 20px;
     text-decoration: none;
-    color: #F1F5F9;
+    color: #F0F4F8;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s, background 0.15s;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s, background 0.2s;
     cursor: pointer;
   }
   .db-quick-card:hover {
-    border-color: rgba(220,38,38,0.5);
-    box-shadow: 0 0 0 1px rgba(220,38,38,0.15), 0 8px 28px rgba(220,38,38,0.1);
-    background: #1A1F2E;
+    border-color: rgba(215,38,61,0.4);
+    box-shadow: 0 0 20px rgba(215,38,61,0.15), 0 8px 28px rgba(2,24,43,0.4);
+    background: #0A2A44;
     transform: translateY(-2px);
   }
   .db-quick-icon {
@@ -191,66 +263,68 @@
     flex-shrink: 0;
   }
   .db-quick-name {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', system-ui, sans-serif;
     font-size: 14px; font-weight: 600;
-    color: #F1F5F9;
+    color: #F0F4F8;
     margin-bottom: 3px;
   }
-  .db-quick-desc { font-size: 12px; color: #64748B; line-height: 1.4; }
+  .db-quick-desc { font-size: 12px; color: #5E81A4; line-height: 1.4; }
 
   /* ── Recent purchases ── */
   .db-facturas-card {
-    background: #161B25;
-    border: 1px solid #2A3347;
+    background: #071F37;
+    border: 1px solid #164063;
     border-radius: 14px;
     overflow: hidden;
+    animation: revealUp 0.6s ease both;
+    animation-delay: 0.35s;
   }
   .db-facturas-header {
     padding: 18px 22px;
-    border-bottom: 1px solid #2A3347;
+    border-bottom: 1px solid #0E3555;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   .db-facturas-title {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', system-ui, sans-serif;
     font-size: 14px; font-weight: 600;
-    color: #F1F5F9;
+    color: #F0F4F8;
   }
   .db-facturas-link {
     font-size: 12px; font-weight: 600;
-    color: #DC2626;
+    color: #D7263D;
     text-decoration: none;
     transition: color 0.15s;
   }
-  .db-facturas-link:hover { color: #EF4444; }
+  .db-facturas-link:hover { color: #FB7185; }
   .db-factura-row {
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 14px 22px;
-    border-bottom: 1px solid rgba(42,51,71,0.6);
+    border-bottom: 1px solid rgba(22,64,99,0.6);
     transition: background 0.12s;
   }
   .db-factura-row:last-child { border-bottom: none; }
   .db-factura-row:hover { background: rgba(255,255,255,0.02); }
   .db-factura-num {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'JetBrains Mono', 'Rubik', monospace;
     font-size: 13px; font-weight: 600;
-    color: #94A3B8;
+    color: #A3BFDB;
     min-width: 32px;
   }
   .db-factura-info { flex: 1; min-width: 0; }
   .db-factura-id {
     font-size: 13px; font-weight: 700;
-    color: #F1F5F9;
+    color: #F0F4F8;
     margin-bottom: 2px;
   }
-  .db-factura-date { font-size: 11px; color: #64748B; }
+  .db-factura-date { font-size: 11px; color: #5E81A4; }
   .db-factura-total {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'JetBrains Mono', 'Rubik', monospace;
     font-size: 14px; font-weight: 700;
-    color: #F1F5F9;
+    color: #F0F4F8;
     white-space: nowrap;
   }
   .db-estado-badge {
@@ -263,8 +337,8 @@
   }
   .db-estado-pendiente  { background: rgba(245,158,11,0.12); color: #FCD34D; border: 1px solid rgba(245,158,11,0.25); }
   .db-estado-completado { background: rgba(34,197,94,0.12);  color: #86EFAC; border: 1px solid rgba(34,197,94,0.25); }
-  .db-estado-cancelado  { background: rgba(239,68,68,0.12);  color: #FCA5A5; border: 1px solid rgba(239,68,68,0.25); }
-  .db-estado-default    { background: rgba(148,163,184,0.1); color: #94A3B8; border: 1px solid rgba(148,163,184,0.2); }
+  .db-estado-cancelado  { background: rgba(239,68,68,0.12);  color: #FB7185; border: 1px solid rgba(239,68,68,0.25); }
+  .db-estado-default    { background: rgba(163,191,219,0.1); color: #A3BFDB; border: 1px solid rgba(163,191,219,0.2); }
 
   /* Empty state */
   .db-empty {
@@ -275,43 +349,42 @@
     text-align: center;
   }
   .db-empty-title {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', system-ui, sans-serif;
     font-size: 15px; font-weight: 600;
-    color: #94A3B8;
+    color: #A3BFDB;
     margin-top: 16px; margin-bottom: 6px;
   }
-  .db-empty-sub { font-size: 13px; color: #4A5568; margin-bottom: 22px; }
+  .db-empty-sub { font-size: 13px; color: #5E81A4; margin-bottom: 22px; }
   .db-btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #DC2626;
+    background: #D7263D;
     color: #fff;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito Sans', system-ui, sans-serif;
     font-size: 13px; font-weight: 700;
     padding: 10px 22px;
     border-radius: 10px;
     text-decoration: none;
     border: none; cursor: pointer;
     transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
-    box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+    box-shadow: 0 4px 12px rgba(215,38,61,0.3);
   }
-  .db-btn-primary:hover { background: #B91C1C; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(220,38,38,0.35); }
+  .db-btn-primary:hover { background: #BE1E34; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(215,38,61,0.35); }
 
   /* Loading skeleton */
   .db-loading {
     display: flex; align-items: center; justify-content: center;
     min-height: 300px;
     gap: 10px;
-    color: #4A5568;
+    color: #5E81A4;
     font-size: 14px;
   }
   .db-spinner {
     width: 22px; height: 22px;
-    border: 2px solid #2A3347;
-    border-top-color: #DC2626;
+    border: 2px solid #164063;
+    border-top-color: #D7263D;
     border-radius: 50%;
     animation: db-spin 0.7s linear infinite;
   }
-  @keyframes db-spin { to { transform: rotate(360deg); } }
 
   /* Responsive */
   @media (max-width: 900px) {
@@ -356,7 +429,7 @@
           </svg>
           ¡Hola, {{ session()?.nombre }}!
         </div>
-        <div class="db-banner-sub">Panel de administración — todo bajo control</div>
+        <div class="db-banner-sub">Panel de administración — Gestiona la tienda</div>
       </div>
       <div class="db-banner-icon">
         <!-- Large crown -->
@@ -438,7 +511,7 @@
 
       <!-- Productos -->
       <a class="db-quick-card" routerLink="/productos">
-        <div class="db-quick-icon" style="background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.2);">
+        <div class="db-quick-icon" style="background:rgba(215,38,61,0.1);border:1px solid rgba(215,38,61,0.2);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
             <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
@@ -539,7 +612,7 @@
     <!-- Welcome banner -->
     <div class="db-banner-cliente">
       <div class="db-banner-text">
-        <div class="db-banner-greeting" style="color:#F1F5F9;">
+        <div class="db-banner-greeting" style="color:#F0F4F8;">
           <!-- Shopping bag SVG -->
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -548,7 +621,7 @@
           </svg>
           ¡Hola, {{ session()?.nombre }}!
         </div>
-        <div class="db-banner-sub" style="color:rgba(148,163,184,0.85);">Bienvenido a tu tienda personal — explora y compra</div>
+        <div class="db-banner-sub" style="color:rgba(163,191,219,0.85);">Bienvenido a la Tienda de Gerardo — Explora y disfruta tu compra</div>
       </div>
       <div class="db-banner-icon">
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -615,7 +688,7 @@
 
       <!-- Productos -->
       <a class="db-quick-card" routerLink="/productos">
-        <div class="db-quick-icon" style="background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.2);">
+        <div class="db-quick-icon" style="background:rgba(215,38,61,0.1);border:1px solid rgba(215,38,61,0.2);">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
             <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
@@ -674,7 +747,7 @@
 
         <!-- Empty state -->
         <div class="db-empty">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#2A3347" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#164063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
             <polyline points="14 2 14 8 20 8"/>
             <line x1="16" y1="13" x2="8" y2="13"/>

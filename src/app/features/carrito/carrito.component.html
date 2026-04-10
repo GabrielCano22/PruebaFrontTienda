@@ -1,11 +1,11 @@
 <!-- ============================================================
-     CARRITO — Two-column layout, dark theme
+     CARRITO — Two-column layout, deep navy theme with glassmorphism
      ============================================================ -->
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap');
   :root {
-    --bg:#0F1117;--surface:#161B25;--surface2:#1C2333;--border:#2A3347;
-    --red:#DC2626;--red-h:#B91C1C;--text:#E2E8F0;--muted:#64748B;--soft:#94A3B8;
+    --bg:#02182B;--surface:#071F37;--surface2:#0A2A44;--border:#164063;--border-subtle:#0E3555;
+    --red:#D7263D;--red-h:#BE1E34;--text:#F0F4F8;--muted:#5E81A4;--soft:#A3BFDB;
   }
   .cart-page{font-family:'Nunito Sans',sans-serif;color:var(--text);min-height:100%;}
   .cart-page h1,.cart-page h2,.cart-page h3{font-family:'Rubik',sans-serif;}
@@ -13,38 +13,52 @@
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   @keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  @keyframes barShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+  @keyframes pulseRing{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.5);opacity:0}}
+  @keyframes greenBorderRotate{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
   .anim-up{animation:fadeUp .4s cubic-bezier(.4,0,.2,1) both}
   .anim-in{animation:fadeIn .3s ease both}
   .anim-scale{animation:scaleIn .5s cubic-bezier(.4,0,.2,1) both}
-  .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}
-  .skel{background:linear-gradient(90deg,#1C2333 25%,#222b3a 50%,#1C2333 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
+  .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}.d5{animation-delay:.25s}
+  .skel{background:linear-gradient(90deg,#0A2A44 25%,#0E3555 50%,#0A2A44 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
   @keyframes shimmer{to{background-position:-200% 0}}
-  .cart-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color .2s;}
-  .cart-item:hover{border-color:rgba(59,130,246,.3);}
-  .qty-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;line-height:1;}
-  .qty-btn:hover{background:var(--border);border-color:#3B82F6;}
-  .qty-btn-remove:hover{background:rgba(220,38,38,.12);border-color:rgba(220,38,38,.3);color:#F87171;}
-  .sidebar{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;position:sticky;top:24px;}
+  .cart-item{background:rgba(7,31,55,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color .25s,box-shadow .25s;}
+  .cart-item:hover{border-color:rgba(215,38,61,.25);box-shadow:0 0 20px rgba(215,38,61,.06);}
+  .qty-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border-subtle);background:var(--surface2);color:var(--text);font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;line-height:1;}
+  .qty-btn:hover{background:var(--border-subtle);border-color:var(--border);}
+  .qty-btn-remove:hover{background:rgba(215,38,61,.12);border-color:rgba(215,38,61,.3);color:#F87171;}
+  .sidebar{position:relative;background:rgba(7,31,55,0.6);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid var(--border);border-radius:16px;padding:24px;position:sticky;top:24px;overflow:hidden;}
+  .sidebar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D7263D,transparent);}
   .divider{height:1px;background:var(--border);margin:16px 0;}
-  .btn-primary{background:var(--red);color:#fff;padding:13px 22px;border-radius:12px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:all .2s;font-family:'Nunito Sans',sans-serif;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;}
-  .btn-primary:hover:not(:disabled){background:var(--red-h);transform:translateY(-1px);}
-  .btn-primary:disabled{opacity:.6;cursor:not-allowed;}
+  .btn-primary{background:linear-gradient(135deg,#D7263D,#BE1E34);color:#fff;padding:13px 22px;border-radius:12px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:all .25s;font-family:'Nunito Sans',sans-serif;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 0 20px rgba(215,38,61,.2),0 4px 15px rgba(215,38,61,.15);}
+  .btn-primary:hover:not(:disabled){background:linear-gradient(135deg,#BE1E34,#A8192D);transform:translateY(-1px);box-shadow:0 0 28px rgba(215,38,61,.3),0 6px 20px rgba(215,38,61,.2);}
+  .btn-primary:disabled{opacity:.6;cursor:not-allowed;box-shadow:none;}
   .btn-ghost{background:transparent;color:var(--soft);padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;border:1px solid var(--border);cursor:pointer;transition:all .2s;font-family:'Nunito Sans',sans-serif;}
   .btn-ghost:hover{background:var(--surface2);color:var(--text);}
-  .discount-bar-track{height:6px;background:var(--border);border-radius:999px;overflow:hidden;}
-  .discount-bar-fill{height:100%;background:linear-gradient(90deg,#22C55E,#4ADE80);border-radius:999px;transition:width .5s ease;}
-  .success-card{background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(16,185,129,.05));border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:36px;text-align:center;animation:scaleIn .5s cubic-bezier(.4,0,.2,1) both;}
+  .discount-bar-track{height:6px;background:var(--border);border-radius:999px;overflow:hidden;position:relative;}
+  .discount-bar-fill{height:100%;background:linear-gradient(90deg,#10B981,#34D399);border-radius:999px;transition:width .5s ease;position:relative;overflow:hidden;}
+  .discount-bar-fill::after{content:'';position:absolute;top:0;left:0;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:barShimmer 2s ease-in-out infinite;}
+  .success-card{position:relative;background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(16,185,129,.05));border:2px solid transparent;border-radius:20px;padding:36px;text-align:center;animation:scaleIn .5s cubic-bezier(.4,0,.2,1) both;background-clip:padding-box;}
+  .success-card-border{position:relative;border-radius:20px;padding:2px;background:linear-gradient(135deg,#10B981,#34D399,#10B981,#34D399);background-size:300% 300%;animation:greenBorderRotate 4s ease infinite;}
+  .success-card-inner{background:linear-gradient(135deg,rgba(2,24,43,.97),rgba(7,31,55,.95));border-radius:18px;padding:36px;text-align:center;}
+  .checkmark-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+  .checkmark-ring{position:absolute;width:72px;height:72px;border-radius:50%;border:2px solid rgba(34,197,94,.35);animation:pulseRing 2s cubic-bezier(.4,0,.6,1) infinite;}
   .link-btn{color:#60A5FA;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
   .link-btn:hover{color:#93C5FD;}
   .badge-discount{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#4ADE80;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;}
+  .price-mono{font-family:'JetBrains Mono',monospace;}
+  @media (max-width:860px){
+    .cart-grid{grid-template-columns:1fr !important;}
+    .sidebar{position:static !important;}
+  }
 </style>
 
 <div class="cart-page" style="background:var(--bg);padding:32px;min-height:100vh;">
 
   <!-- Header -->
   <div class="anim-up" style="display:flex;align-items:center;gap:14px;margin-bottom:28px;">
-    <div style="width:44px;height:44px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <div style="width:44px;height:44px;background:rgba(215,38,61,.1);border:1px solid rgba(215,38,61,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D7263D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
     </div>
@@ -61,7 +75,7 @@
 
   <!-- Loading -->
   @if (loading()) {
-    <div style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;" class="anim-in">
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;" class="anim-in cart-grid">
       <div style="display:flex;flex-direction:column;gap:12px;">
         @for (i of [1,2,3]; track i) {
           <div class="skel" style="height:110px;"></div>
@@ -73,28 +87,33 @@
 
   <!-- Success state: Factura generada -->
   @if (!loading() && facturaGenerada()) {
-    <div class="success-card anim-scale">
-      <div style="width:72px;height:72px;background:rgba(34,197,94,.15);border:2px solid rgba(34,197,94,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-      </div>
-      <h2 style="font-size:24px;font-weight:800;color:var(--text);margin:0 0 8px;">¡Compra exitosa!</h2>
-      <p style="font-size:14px;color:var(--muted);margin:0 0 24px;">Tu orden ha sido procesada correctamente</p>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:24px;text-align:left;">
-        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-          <span style="font-size:13px;color:var(--muted);">N° de Factura</span>
-          <span style="font-size:13px;font-weight:700;color:var(--text);font-family:monospace;">{{ shortId(facturaGenerada().id_factura) }}</span>
+    <div class="success-card-border anim-scale" style="max-width:480px;margin:0 auto;">
+      <div class="success-card-inner">
+        <div class="checkmark-wrap">
+          <div class="checkmark-ring"></div>
+          <div style="width:72px;height:72px;background:rgba(34,197,94,.15);border:2px solid rgba(34,197,94,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
         </div>
-        <div style="display:flex;justify-content:space-between;">
-          <span style="font-size:13px;color:var(--muted);">Total pagado</span>
-          <span style="font-size:18px;font-weight:800;color:#4ADE80;font-family:'Rubik',sans-serif;">${{ facturaGenerada().total_neto | number:'1.2-2' }}</span>
+        <h2 style="font-size:24px;font-weight:800;color:var(--text);margin:0 0 8px;">¡Compra exitosa!</h2>
+        <p style="font-size:14px;color:var(--muted);margin:0 0 24px;">Tu orden ha sido procesada correctamente</p>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:24px;text-align:left;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <span style="font-size:13px;color:var(--muted);">N° de Factura</span>
+            <span class="price-mono" style="font-size:13px;font-weight:700;color:var(--text);">{{ shortId(facturaGenerada().id_factura) }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <span style="font-size:13px;color:var(--muted);">Total pagado</span>
+            <span class="price-mono" style="font-size:18px;font-weight:800;color:#4ADE80;">${{ facturaGenerada().total_neto | number:'1.2-2' }}</span>
+          </div>
         </div>
+        <a routerLink="/mis-compras" class="link-btn" style="justify-content:center;">
+          Ver mis compras
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
-      <a routerLink="/mis-compras" class="link-btn" style="justify-content:center;">
-        Ver mis compras
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
     </div>
   }
 
@@ -102,18 +121,18 @@
   @if (!loading() && !facturaGenerada() && !hasItems()) {
     <div class="anim-up" style="text-align:center;padding:80px 24px;">
       <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 24px;display:block;">
-        <circle cx="60" cy="60" r="60" fill="rgba(42,51,71,0.4)"/>
-        <path d="M35 40h6l8 32a6 6 0 0 0 6 4.8h24a6 6 0 0 0 6-4.8l4-20H42" stroke="#2A3347" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="55" cy="82" r="3" fill="#2A3347"/>
-        <circle cx="73" cy="82" r="3" fill="#2A3347"/>
-        <path d="M35 40h6l8 32a6 6 0 0 0 6 4.8h24a6 6 0 0 0 6-4.8l4-20H42" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="55" cy="82" r="3" fill="#64748B"/>
-        <circle cx="73" cy="82" r="3" fill="#64748B"/>
-        <path d="M68 54l-8 8m0-8l8 8" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="60" cy="60" r="60" fill="rgba(22,64,99,0.4)"/>
+        <path d="M35 40h6l8 32a6 6 0 0 0 6 4.8h24a6 6 0 0 0 6-4.8l4-20H42" stroke="#164063" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="55" cy="82" r="3" fill="#164063"/>
+        <circle cx="73" cy="82" r="3" fill="#164063"/>
+        <path d="M35 40h6l8 32a6 6 0 0 0 6 4.8h24a6 6 0 0 0 6-4.8l4-20H42" stroke="#5E81A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="55" cy="82" r="3" fill="#5E81A4"/>
+        <circle cx="73" cy="82" r="3" fill="#5E81A4"/>
+        <path d="M68 54l-8 8m0-8l8 8" stroke="#D7263D" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
       <h2 style="font-family:'Rubik',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin:0 0 8px;">Tu carrito está vacío</h2>
       <p style="font-size:14px;color:var(--muted);margin:0 0 28px;">Explora nuestros productos y agrega artículos a tu carrito</p>
-      <a routerLink="/productos" style="background:var(--red);color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .2s;">
+      <a routerLink="/productos" style="background:linear-gradient(135deg,#D7263D,#BE1E34);color:#fff;padding:12px 28px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 0 20px rgba(215,38,61,.2),0 4px 15px rgba(215,38,61,.15);">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Explorar productos
       </a>
@@ -124,13 +143,13 @@
   @if (!loading() && !facturaGenerada() && hasItems()) {
     <!-- Error -->
     @if (error()) {
-      <div class="anim-in" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:10px;padding:14px 18px;margin-bottom:18px;color:#F87171;font-size:14px;display:flex;align-items:center;gap:10px;">
+      <div class="anim-in" style="background:rgba(215,38,61,.1);border:1px solid rgba(215,38,61,.3);border-radius:10px;padding:14px 18px;margin-bottom:18px;color:#F87171;font-size:14px;display:flex;align-items:center;gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
         {{ error() }}
       </div>
     }
 
-    <div style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;">
+    <div class="cart-grid" style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;">
 
       <!-- Left: Items -->
       <div style="display:flex;flex-direction:column;gap:12px;">
@@ -141,12 +160,12 @@
           </button>
         </div>
 
-        @for (detalle of carrito()!.detalles; track detalle.id_detalle_carrito) {
-          <div class="cart-item anim-up">
+        @for (detalle of carrito()!.detalles; track detalle.id_detalle_carrito; let idx = $index) {
+          <div class="cart-item anim-up" [style.animation-delay]="(idx * 0.06) + 's'">
             <div style="display:flex;align-items:center;gap:16px;">
               <!-- Product icon placeholder -->
               <div style="width:52px;height:52px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5E81A4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
               </div>
@@ -155,21 +174,21 @@
                 <p style="font-weight:600;font-size:14px;color:var(--text);margin:0 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
                   {{ detalle.producto?.nombre || 'Producto' }}
                 </p>
-                <p style="font-size:13px;color:var(--muted);margin:0;">${{ detalle.precio_unitario | number:'1.2-2' }} c/u</p>
+                <p class="price-mono" style="font-size:13px;color:var(--muted);margin:0;">${{ detalle.precio_unitario | number:'1.2-2' }} c/u</p>
               </div>
               <!-- Quantity -->
               <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
                 <button class="qty-btn" (click)="updateCantidad(detalle, -1)" aria-label="Reducir cantidad">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 </button>
-                <span style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:700;color:var(--text);min-width:20px;text-align:center;">{{ detalle.cantidad }}</span>
+                <span class="price-mono" style="font-size:16px;font-weight:700;color:var(--text);min-width:20px;text-align:center;">{{ detalle.cantidad }}</span>
                 <button class="qty-btn" (click)="updateCantidad(detalle, 1)" aria-label="Aumentar cantidad">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 </button>
               </div>
               <!-- Subtotal -->
               <div style="text-align:right;flex-shrink:0;min-width:80px;">
-                <p style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:0;">${{ (+detalle.precio_unitario * detalle.cantidad) | number:'1.2-2' }}</p>
+                <p class="price-mono" style="font-size:16px;font-weight:700;color:var(--text);margin:0;">${{ (+detalle.precio_unitario * detalle.cantidad) | number:'1.2-2' }}</p>
               </div>
               <!-- Remove -->
               <button class="qty-btn qty-btn-remove" style="color:var(--muted);" (click)="quitar(detalle)" aria-label="Eliminar">
@@ -198,8 +217,8 @@
               <div class="discount-bar-fill" [style.width]="(totalItems() / proximoDescuento()!.unidades_minimas * 100) + '%'"></div>
             </div>
             <div style="display:flex;justify-content:space-between;margin-top:5px;">
-              <span style="font-size:11px;color:var(--muted);">{{ totalItems() }} uds</span>
-              <span style="font-size:11px;color:var(--muted);">{{ proximoDescuento()!.unidades_minimas }} uds</span>
+              <span class="price-mono" style="font-size:11px;color:var(--muted);">{{ totalItems() }} uds</span>
+              <span class="price-mono" style="font-size:11px;color:var(--muted);">{{ proximoDescuento()!.unidades_minimas }} uds</span>
             </div>
           </div>
         }
@@ -207,7 +226,7 @@
         <!-- Subtotal -->
         <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
           <span style="font-size:14px;color:var(--soft);">Subtotal ({{ totalItems() }} items)</span>
-          <span style="font-size:14px;font-weight:600;color:var(--text);">${{ totalBruto() | number:'1.2-2' }}</span>
+          <span class="price-mono" style="font-size:14px;font-weight:600;color:var(--text);">${{ totalBruto() | number:'1.2-2' }}</span>
         </div>
 
         <!-- Descuento aplicado -->
@@ -217,7 +236,7 @@
               <span style="font-size:14px;color:#4ADE80;">Descuento aplicado</span>
               <span class="badge-discount" style="margin-left:8px;font-size:11px;padding:2px 8px;">-{{ descuentoAplicable()!.porcentaje }}%</span>
             </div>
-            <span style="font-size:14px;font-weight:600;color:#4ADE80;">-${{ ahorro() | number:'1.2-2' }}</span>
+            <span class="price-mono" style="font-size:14px;font-weight:600;color:#4ADE80;">-${{ ahorro() | number:'1.2-2' }}</span>
           </div>
         }
 
@@ -226,7 +245,7 @@
         <!-- Total -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;">
           <span style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:700;color:var(--text);">Total</span>
-          <span style="font-family:'Rubik',sans-serif;font-size:24px;font-weight:800;color:#4ADE80;">${{ totalNeto() | number:'1.2-2' }}</span>
+          <span class="price-mono" style="font-size:24px;font-weight:800;color:#4ADE80;">${{ totalNeto() | number:'1.2-2' }}</span>
         </div>
 
         <!-- Generar factura -->

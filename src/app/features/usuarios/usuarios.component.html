@@ -2,42 +2,42 @@
      USUARIOS — Admin panel, dark theme
      ============================================================ -->
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap');
+  
   :root {
-    --bg: #0F1117; --surface: #161B25; --surface2: #1C2333;
-    --border: #2A3347; --red: #DC2626; --red-h: #B91C1C;
-    --text: #E2E8F0; --muted: #64748B; --soft: #94A3B8;
+    --bg: #02182B; --surface: #071F37; --surface2: #0A2A44;
+    --border: #164063; --red: #D7263D; --red-h: #BE1E34;
+    --text: #F0F4F8; --muted: #5E81A4; --soft: #A3BFDB;
   }
-  .u-page { font-family:'Nunito Sans',sans-serif; color:var(--text); min-height:100%; }
-  .u-page h1,.u-page h2,.u-page h3 { font-family:'Rubik',sans-serif; }
+  .u-page { font-family:'Nunito Sans',system-ui,sans-serif; color:var(--text); min-height:100%; }
+  .u-page h1,.u-page h2,.u-page h3 { font-family:'Rubik',system-ui,sans-serif; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
   .anim-up { animation:fadeUp .4s cubic-bezier(.4,0,.2,1) both; }
   .anim-in { animation:fadeIn .3s ease both; }
   .d1{animation-delay:.05s} .d2{animation-delay:.1s} .d3{animation-delay:.15s}
-  .skel { background:linear-gradient(90deg,#1C2333 25%,#222b3a 50%,#1C2333 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:6px; }
+  .skel { background:linear-gradient(90deg,#0A2A44 25%,#222b3a 50%,#0A2A44 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:6px; }
   @keyframes shimmer { to{background-position:-200% 0} }
-  .modal-backdrop { position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;display:flex;align-items:center;justify-content:center; }
+  .modal-backdrop { position:fixed;inset:0;background:rgba(2,24,43,.7);backdrop-filter:blur(16px) saturate(150%);z-index:50;display:flex;align-items:center;justify-content:center; }
   .modal-box { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;max-width:420px;width:90%; animation:scaleIn .3s cubic-bezier(.4,0,.2,1) both; }
   @keyframes scaleIn { from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
   .badge { display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;line-height:20px; }
-  .badge-red { background:rgba(220,38,38,.15);color:#F87171; }
+  .badge-red { background:rgba(215,38,61,.15);color:#FB7185; }
   .badge-blue { background:rgba(59,130,246,.15);color:#93C5FD; }
   .badge-green { background:rgba(34,197,94,.15);color:#86EFAC; }
-  .badge-gray { background:rgba(100,116,139,.15);color:#94A3B8; }
+  .badge-gray { background:rgba(100,116,139,.15);color:#A3BFDB; }
   .avatar-circle { width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0; }
   .btn-icon { display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .2s; }
   .btn-icon:hover { background:var(--surface2); }
-  .btn-icon-red:hover { background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.4); }
+  .btn-icon-red:hover { background:rgba(215,38,61,.15);border-color:rgba(215,38,61,.4); }
   .btn-icon-amber:hover { background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3); }
-  input.search-input { background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 14px 10px 40px;outline:none;width:100%;font-family:'Nunito Sans',sans-serif; transition:border-color .2s; }
+  input.search-input { background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 14px 10px 40px;outline:none;width:100%;font-family:'Nunito Sans',system-ui,sans-serif; transition:border-color .2s; }
   input.search-input:focus { border-color:#3B82F6; }
   table { width:100%;border-collapse:collapse; }
   th { text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:10px 16px;border-bottom:1px solid var(--border); }
   td { padding:14px 16px;border-bottom:1px solid rgba(42,51,71,.5);vertical-align:middle; }
   tr:last-child td { border-bottom:none; }
   tr:hover td { background:rgba(255,255,255,.02); }
-  .btn-primary { background:var(--red);color:#fff;padding:8px 18px;border-radius:8px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:background .2s; }
+  .btn-primary { background:linear-gradient(135deg, #D7263D, #BE1E34);color:#fff;padding:8px 18px;border-radius:8px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:background .2s;box-shadow:0 4px 15px rgba(215,38,61,0.25); }
   .btn-primary:hover { background:var(--red-h); }
   .btn-ghost { background:transparent;color:var(--soft);padding:8px 16px;border-radius:8px;font-size:14px;border:1px solid var(--border);cursor:pointer;transition:all .2s; }
   .btn-ghost:hover { background:var(--surface2);color:var(--text); }
@@ -48,8 +48,8 @@
   <!-- Header -->
   <div class="anim-up" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;">
     <div style="display:flex;align-items:center;gap:14px;">
-      <div style="width:44px;height:44px;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div style="width:44px;height:44px;background:rgba(215,38,61,.12);border:1px solid rgba(215,38,61,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D7263D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
         </svg>
       </div>
@@ -67,7 +67,7 @@
 
   <!-- Error -->
   @if (error()) {
-    <div class="anim-in" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#F87171;font-size:14px;">
+    <div class="anim-in" style="background:rgba(215,38,61,.12);border:1px solid rgba(215,38,61,.3);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:#FB7185;font-size:14px;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
       {{ error() }}
     </div>
@@ -75,7 +75,7 @@
 
   <!-- Search -->
   <div class="anim-up d1" style="position:relative;max-width:400px;margin-bottom:24px;">
-    <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5E81A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
     </svg>
     <input class="search-input" type="text" placeholder="Buscar por nombre, usuario o email…"
@@ -120,9 +120,9 @@
       <!-- Empty state -->
       <div class="anim-up" style="text-align:center;padding:72px 24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
         <div style="width:64px;height:64px;background:rgba(100,116,139,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5E81A4" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
         </div>
-        <p style="font-family:'Rubik',sans-serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;">
+        <p style="font-family:'Rubik',system-ui,sans-serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;">
           @if (searchQuery()) { No se encontraron resultados } @else { Sin usuarios registrados }
         </p>
         <p style="font-size:13px;color:var(--muted);">
@@ -178,7 +178,7 @@
                     </span>
                   } @else {
                     <span class="badge badge-gray">
-                      <span style="width:6px;height:6px;background:#94A3B8;border-radius:50%;margin-right:5px;display:inline-block;"></span>
+                      <span style="width:6px;height:6px;background:#A3BFDB;border-radius:50%;margin-right:5px;display:inline-block;"></span>
                       Inactivo
                     </span>
                   }
@@ -201,7 +201,7 @@
                       </button>
                       <!-- Eliminar -->
                       <button class="btn-icon btn-icon-red" (click)="confirmDelete(u.id_usuario)"
-                        title="Eliminar usuario" style="color:#F87171;">
+                        title="Eliminar usuario" style="color:#FB7185;">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
                         </svg>
@@ -249,8 +249,8 @@
   <div class="modal-backdrop anim-in" (click)="cancelDelete()">
     <div class="modal-box" (click)="$event.stopPropagation()">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
-        <div style="width:44px;height:44px;background:rgba(220,38,38,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        <div style="width:44px;height:44px;background:rgba(215,38,61,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D7263D" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
         </div>
         <div>
           <h3 style="font-size:16px;font-weight:700;margin:0;color:var(--text);">Eliminar usuario</h3>

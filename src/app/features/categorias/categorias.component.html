@@ -1,10 +1,10 @@
-<div class="min-h-screen bg-[#0F1117] px-4 py-8 sm:px-6 lg:px-8" style="font-family:'Nunito Sans',sans-serif;">
+<div class="min-h-screen bg-[#02182B] px-4 py-8 sm:px-6 lg:px-8" style="font-family:'Nunito Sans',system-ui,sans-serif;">
 
   <!-- ═══════════════════════════════════════════
        ERROR TOAST
   ══════════════════════════════════════════════ -->
   @if (error()) {
-    <div class="fixed top-5 right-5 z-50 flex items-start gap-3 bg-[#161B25] border border-red-600/40 rounded-xl px-4 py-3 shadow-2xl max-w-sm animate-slide-in">
+    <div class="fixed top-5 right-5 z-50 flex items-start gap-3 bg-[#071F37] border border-red-600/40 rounded-xl px-4 py-3 shadow-2xl max-w-sm animate-slide-in">
       <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
       </svg>
@@ -28,13 +28,13 @@
         </svg>
       </div>
       <div>
-        <h1 class="text-2xl font-bold text-white tracking-tight" style="font-family:'Rubik',sans-serif;">
+        <h1 class="text-2xl font-bold text-white tracking-tight" style="font-family:'Rubik',system-ui,sans-serif;">
           Categorías
         </h1>
         <p class="text-slate-500 text-sm leading-none mt-0.5">Gestión de categorías del catálogo</p>
       </div>
       @if (!loading()) {
-        <span class="inline-flex items-center justify-center min-w-[2rem] h-6 px-2 rounded-full bg-[#2A3347] text-slate-300 text-xs font-semibold border border-[#2A3347]">
+        <span class="inline-flex items-center justify-center min-w-[2rem] h-6 px-2 rounded-full bg-[#164063] text-slate-300 text-xs font-semibold border border-[#164063]">
           {{ categorias().length }}
         </span>
       }
@@ -42,8 +42,8 @@
 
     <button
       (click)="openCreate()"
-      class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:ring-offset-2 focus:ring-offset-[#0F1117] shadow-lg self-start sm:self-auto"
-      style="box-shadow: 0 4px 15px rgba(220,38,38,0.25);">
+      class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:ring-offset-2 focus:ring-offset-[#02182B] shadow-lg self-start sm:self-auto"
+      style="background: linear-gradient(135deg, #D7263D, #BE1E34); box-shadow: 0 4px 15px rgba(215,38,61,0.25);">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
       </svg>
@@ -54,13 +54,13 @@
   <!-- ═══════════════════════════════════════════
        TABLE CARD
   ══════════════════════════════════════════════ -->
-  <div class="bg-[#161B25] border border-[#2A3347] rounded-2xl overflow-hidden shadow-xl">
+  <div class="bg-[#071F37] border border-[#164063] rounded-2xl overflow-hidden shadow-xl">
 
     <!-- Table wrapper (scrollable on small screens) -->
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
-          <tr class="border-b border-[#2A3347]">
+          <tr class="border-b border-[#164063]">
             <th class="text-left px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-500 w-8">
               #
             </th>
@@ -93,29 +93,29 @@
           <!-- LOADING SKELETONS -->
           @if (loading()) {
             @for (row of skeletonRows; track $index) {
-              <tr class="border-b border-[#2A3347]/50" [class]="$index % 2 === 0 ? '' : 'bg-[#0F1117]/30'">
+              <tr class="border-b border-[#164063]/50" [class]="$index % 2 === 0 ? '' : 'bg-[#02182B]/30'">
                 <td class="px-6 py-4">
-                  <div class="w-6 h-3 bg-[#2A3347] rounded animate-pulse"></div>
+                  <div class="w-6 h-3 bg-[#164063] rounded animate-pulse"></div>
                 </td>
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-[#2A3347] animate-pulse flex-shrink-0"></div>
+                    <div class="w-8 h-8 rounded-lg bg-[#164063] animate-pulse flex-shrink-0"></div>
                     <div class="space-y-1.5">
-                      <div class="w-28 h-3 bg-[#2A3347] rounded animate-pulse"></div>
-                      <div class="w-16 h-2.5 bg-[#2A3347] rounded animate-pulse"></div>
+                      <div class="w-28 h-3 bg-[#164063] rounded animate-pulse"></div>
+                      <div class="w-16 h-2.5 bg-[#164063] rounded animate-pulse"></div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 hidden md:table-cell">
-                  <div class="w-40 h-3 bg-[#2A3347] rounded animate-pulse"></div>
+                  <div class="w-40 h-3 bg-[#164063] rounded animate-pulse"></div>
                 </td>
                 <td class="px-6 py-4 hidden lg:table-cell">
-                  <div class="w-24 h-3 bg-[#2A3347] rounded animate-pulse"></div>
+                  <div class="w-24 h-3 bg-[#164063] rounded animate-pulse"></div>
                 </td>
                 <td class="px-6 py-4">
                   <div class="flex items-center justify-end gap-2">
-                    <div class="w-8 h-8 rounded-lg bg-[#2A3347] animate-pulse"></div>
-                    <div class="w-8 h-8 rounded-lg bg-[#2A3347] animate-pulse"></div>
+                    <div class="w-8 h-8 rounded-lg bg-[#164063] animate-pulse"></div>
+                    <div class="w-8 h-8 rounded-lg bg-[#164063] animate-pulse"></div>
                   </div>
                 </td>
               </tr>
@@ -127,13 +127,13 @@
             <tr>
               <td colspan="5" class="px-6 py-20 text-center">
                 <div class="flex flex-col items-center gap-4">
-                  <div class="w-16 h-16 rounded-2xl bg-[#0F1117] border border-[#2A3347] flex items-center justify-center">
+                  <div class="w-16 h-16 rounded-2xl bg-[#02182B] border border-[#164063] flex items-center justify-center">
                     <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.3">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z" />
                     </svg>
                   </div>
                   <div>
-                    <h3 class="text-slate-300 font-semibold mb-1" style="font-family:'Rubik',sans-serif;">No hay categorías</h3>
+                    <h3 class="text-slate-300 font-semibold mb-1" style="font-family:'Rubik',system-ui,sans-serif;">No hay categorías</h3>
                     <p class="text-slate-500 text-xs">Crea la primera categoría para organizar los productos.</p>
                   </div>
                   <button
@@ -153,8 +153,8 @@
           @if (!loading()) {
             @for (cat of categorias(); track cat.id_categoria; let i = $index) {
               <tr
-                class="border-b border-[#2A3347]/50 hover:bg-[#2A3347]/20 transition-colors duration-150 group"
-                [class]="i % 2 !== 0 ? 'bg-[#0F1117]/25' : ''">
+                class="border-b border-[#164063]/50 hover:bg-[#164063]/20 transition-colors duration-150 group"
+                [class]="i % 2 !== 0 ? 'bg-[#02182B]/25' : ''">
 
                 <!-- Index -->
                 <td class="px-6 py-4 text-slate-600 text-xs font-mono tabular-nums">
@@ -164,7 +164,7 @@
                 <!-- Nombre -->
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 border border-[#2A3347]"
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 border border-[#164063]"
                          [style.background]="'hsl(' + ((cat.id_categoria.charCodeAt(0) * 47) % 360) + ',30%,18%)'">
                       <span class="text-xs font-bold"
                             [style.color]="'hsl(' + ((cat.id_categoria.charCodeAt(0) * 47) % 360) + ',65%,65%)'">
@@ -172,7 +172,7 @@
                       </span>
                     </div>
                     <div>
-                      <p class="text-white font-semibold text-sm leading-tight" style="font-family:'Rubik',sans-serif;">
+                      <p class="text-white font-semibold text-sm leading-tight" style="font-family:'Rubik',system-ui,sans-serif;">
                         {{ cat.nombre }}
                       </p>
                       <p class="text-slate-600 text-xs font-mono mt-0.5">
@@ -210,7 +210,7 @@
                     <button
                       (click)="openEdit(cat)"
                       title="Editar categoría"
-                      class="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0F1117] hover:bg-[#2A3347] border border-[#2A3347] hover:border-slate-500 text-slate-500 hover:text-white transition-all duration-200 focus:outline-none opacity-0 group-hover:opacity-100">
+                      class="w-8 h-8 flex items-center justify-center rounded-lg bg-[#02182B] hover:bg-[#164063] border border-[#164063] hover:border-slate-500 text-slate-500 hover:text-white transition-all duration-200 focus:outline-none opacity-0 group-hover:opacity-100">
                       <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
                       </svg>
@@ -236,7 +236,7 @@
 
     <!-- Table footer -->
     @if (!loading() && categorias().length > 0) {
-      <div class="px-6 py-3 border-t border-[#2A3347] bg-[#0F1117]/30 flex items-center justify-between">
+      <div class="px-6 py-3 border-t border-[#164063] bg-[#02182B]/30 flex items-center justify-between">
         <p class="text-slate-600 text-xs">
           {{ categorias().length }} {{ categorias().length === 1 ? 'categoría' : 'categorías' }} en total
         </p>
@@ -253,15 +253,15 @@
   @if (showModal()) {
     <div
       class="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style="background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);"
+      style="background: rgba(2,24,43,0.7); backdrop-filter: blur(16px) saturate(150%);"
       (click)="closeModal()">
       <div
-        class="bg-[#161B25] border border-[#2A3347] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden"
-        style="box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(42,51,71,0.5);"
+        class="bg-[#071F37] border border-[#164063] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden"
+        style="box-shadow: 0 25px 60px rgba(2,24,43,0.6), 0 0 0 1px rgba(42,51,71,0.5);"
         (click)="$event.stopPropagation()">
 
         <!-- Modal header -->
-        <div class="flex items-center justify-between px-6 py-4 border-b border-[#2A3347]">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-[#164063]">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 rounded-lg bg-red-600/15 flex items-center justify-center">
               @if (editing()) {
@@ -274,13 +274,13 @@
                 </svg>
               }
             </div>
-            <h2 class="text-white font-bold text-lg" style="font-family:'Rubik',sans-serif;">
+            <h2 class="text-white font-bold text-lg" style="font-family:'Rubik',system-ui,sans-serif;">
               {{ editing() ? 'Editar Categoría' : 'Nueva Categoría' }}
             </h2>
           </div>
           <button
             (click)="closeModal()"
-            class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-500 hover:text-white hover:bg-[#2A3347] transition-all duration-150 focus:outline-none">
+            class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-500 hover:text-white hover:bg-[#164063] transition-all duration-150 focus:outline-none">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -300,7 +300,7 @@
                 type="text"
                 formControlName="nombre"
                 placeholder="Ej: Electrónica, Ropa, Hogar…"
-                class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
+                class="w-full bg-[#02182B] border border-[#164063] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200"
                 [class.border-red-500]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
               />
               @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
@@ -324,7 +324,7 @@
                 formControlName="descripcion"
                 rows="3"
                 placeholder="Describe brevemente esta categoría…"
-                class="w-full bg-[#0F1117] border border-[#2A3347] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200 resize-none"
+                class="w-full bg-[#02182B] border border-[#164063] text-slate-200 text-sm placeholder-slate-600 rounded-xl px-4 py-2.5 outline-none focus:border-red-600/60 focus:ring-2 focus:ring-red-600/10 transition-all duration-200 resize-none"
               ></textarea>
             </div>
 
@@ -332,11 +332,11 @@
         </div>
 
         <!-- Modal footer -->
-        <div class="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#2A3347] bg-[#0F1117]/40">
+        <div class="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#164063] bg-[#02182B]/40">
           <button
             type="button"
             (click)="closeModal()"
-            class="px-4 py-2.5 text-sm font-semibold text-slate-400 hover:text-white bg-[#0F1117] hover:bg-[#2A3347] border border-[#2A3347] rounded-xl transition-all duration-200 focus:outline-none">
+            class="px-4 py-2.5 text-sm font-semibold text-slate-400 hover:text-white bg-[#02182B] hover:bg-[#164063] border border-[#164063] rounded-xl transition-all duration-200 focus:outline-none">
             Cancelar
           </button>
           <button
@@ -345,7 +345,7 @@
             (click)="save()"
             [disabled]="form.invalid"
             class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-            style="box-shadow: 0 4px 15px rgba(220,38,38,0.25);">
+            style="background: linear-gradient(135deg, #D7263D, #BE1E34); box-shadow: 0 4px 15px rgba(215,38,61,0.25);">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
@@ -363,11 +363,11 @@
   @if (deleteConfirm()) {
     <div
       class="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style="background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);"
+      style="background: rgba(2,24,43,0.75); backdrop-filter: blur(16px) saturate(150%);"
       (click)="cancelDelete()">
       <div
-        class="bg-[#161B25] border border-[#2A3347] rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden"
-        style="box-shadow: 0 25px 60px rgba(0,0,0,0.6);"
+        class="bg-[#071F37] border border-[#164063] rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden"
+        style="box-shadow: 0 25px 60px rgba(2,24,43,0.6);"
         (click)="$event.stopPropagation()">
 
         <div class="px-6 pt-6 pb-2 flex flex-col items-center text-center">
@@ -376,7 +376,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
           </div>
-          <h3 class="text-white font-bold text-lg mb-1" style="font-family:'Rubik',sans-serif;">Eliminar categoría</h3>
+          <h3 class="text-white font-bold text-lg mb-1" style="font-family:'Rubik',system-ui,sans-serif;">Eliminar categoría</h3>
           @if (getDeleteName()) {
             <p class="text-slate-400 text-sm leading-relaxed">
               ¿Eliminar
@@ -393,13 +393,13 @@
         <div class="flex gap-3 px-6 py-5">
           <button
             (click)="cancelDelete()"
-            class="flex-1 py-2.5 text-sm font-semibold text-slate-400 hover:text-white bg-[#0F1117] hover:bg-[#2A3347] border border-[#2A3347] rounded-xl transition-all duration-200 focus:outline-none">
+            class="flex-1 py-2.5 text-sm font-semibold text-slate-400 hover:text-white bg-[#02182B] hover:bg-[#164063] border border-[#164063] rounded-xl transition-all duration-200 focus:outline-none">
             Cancelar
           </button>
           <button
             (click)="doDelete(deleteConfirm()!)"
-            class="flex-1 py-2.5 text-sm font-semibold bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded-xl transition-all duration-200 focus:outline-none shadow-lg"
-            style="box-shadow: 0 4px 15px rgba(220,38,38,0.25);">
+            class="flex-1 py-2.5 text-sm font-semibold text-white rounded-xl transition-all duration-200 focus:outline-none shadow-lg"
+            style="background: linear-gradient(135deg, #D7263D, #BE1E34); box-shadow: 0 4px 15px rgba(215,38,61,0.25);">
             Sí, eliminar
           </button>
         </div>

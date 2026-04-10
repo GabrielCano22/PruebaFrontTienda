@@ -1,96 +1,106 @@
-<div class="min-h-screen flex bg-[#0F1117]">
+<div class="min-h-screen flex" style="background:#02182B;">
 
   <!-- ═══════════════════════════════════════════════
        LEFT PANEL — Decorative / Branding
   ════════════════════════════════════════════════ -->
   <div class="hidden lg:flex lg:w-5/12 relative overflow-hidden flex-col items-center justify-center px-14"
-       style="background: linear-gradient(135deg, #0F1117 0%, #161B25 50%, #1a0a0a 100%);">
+       style="background: linear-gradient(135deg, #02182B 0%, #041E35 25%, #071F37 50%, #0D1A2B 75%, #02182B 100%);">
 
     <!-- Animated diagonal-lines pattern -->
     <div class="absolute inset-0 opacity-10"
          style="background-image: repeating-linear-gradient(
                   -45deg,
-                  #DC2626 0px,
-                  #DC2626 1px,
+                  #D7263D 0px,
+                  #D7263D 1px,
                   transparent 1px,
                   transparent 28px
                 );
                 animation: slideLines 18s linear infinite;">
     </div>
 
-    <!-- Radial glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full pointer-events-none"
-         style="background: radial-gradient(circle, rgba(220,38,38,0.12) 0%, transparent 70%);
-                animation: breathe 5s ease-in-out infinite;">
-    </div>
+    <!-- Morphing blob -->
+    <div class="absolute" style="width:400px;height:400px;top:25%;left:25%;
+         background:radial-gradient(circle, rgba(215,38,61,0.12) 0%, transparent 70%);
+         filter:blur(60px);
+         animation: morphBlob1 25s ease-in-out infinite;"></div>
+
+    <!-- Subtle blue blob -->
+    <div class="absolute" style="width:300px;height:300px;bottom:15%;right:15%;
+         background:radial-gradient(circle, rgba(14,165,233,0.06) 0%, transparent 70%);
+         filter:blur(50px);
+         animation: morphBlob2 20s ease-in-out infinite;"></div>
 
     <!-- Corner accents -->
-    <div class="absolute top-8 left-8 w-14 h-14 border-t-2 border-l-2 border-red-600/40 rounded-tl-lg"></div>
-    <div class="absolute bottom-8 right-8 w-14 h-14 border-b-2 border-r-2 border-red-600/40 rounded-br-lg"></div>
+    <div class="absolute top-8 left-8 w-14 h-14 rounded-tl-lg" style="border-top:2px solid rgba(215,38,61,0.4);border-left:2px solid rgba(215,38,61,0.4);"></div>
+    <div class="absolute bottom-8 right-8 w-14 h-14 rounded-br-lg" style="border-bottom:2px solid rgba(215,38,61,0.4);border-right:2px solid rgba(215,38,61,0.4);"></div>
 
     <!-- Content -->
-    <div class="relative z-10 text-center max-w-xs animate-fade-in">
+    <div class="relative z-10 text-center max-w-xs auth-content">
 
       <!-- Logo -->
-      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-red-600/10 border border-red-600/30 mb-7 shadow-2xl"
-           style="box-shadow: 0 0 35px rgba(220,38,38,0.15);">
-        <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-7"
+           style="background:rgba(215,38,61,0.1);border:1px solid rgba(215,38,61,0.3);
+                  box-shadow: 0 0 35px rgba(215,38,61,0.15), 0 0 70px rgba(215,38,61,0.05);
+                  animation: pulseGlow 3s ease-in-out infinite;">
+        <svg class="w-10 h-10" fill="none" stroke="#FB7185" viewBox="0 0 24 24" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round"
                 d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
         </svg>
       </div>
 
-      <h1 class="text-3xl font-bold text-white mb-3 tracking-tight"
-          style="font-family:'Rubik',sans-serif; text-shadow: 0 2px 20px rgba(220,38,38,0.25);">
-        Únete a<br><span class="text-red-500">La Tienda de Gerardo</span>
+      <h1 class="text-3xl font-bold mb-3 tracking-tight"
+          style="font-family:'Rubik',system-ui,sans-serif;color:#F0F4F8;
+                 text-shadow: 0 2px 20px rgba(215,38,61,0.25);">
+        Unete a<br><span style="color:#FB7185;">La Tienda de Gerardo</span>
       </h1>
 
-      <p class="text-slate-400 text-base mb-8 leading-relaxed" style="font-family:'Nunito Sans',sans-serif;">
+      <p class="text-base mb-8 leading-relaxed" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
         Crea tu cuenta en segundos y empieza a disfrutar de los mejores productos.
       </p>
 
       <!-- Steps -->
       <div class="flex flex-col gap-4 text-left">
-        <div class="flex items-center gap-4">
-          <div class="w-8 h-8 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0"
-               style="font-family:'Rubik',sans-serif;">1</div>
-          <span class="text-slate-300 text-sm" style="font-family:'Nunito Sans',sans-serif;">Completa el formulario de registro</span>
+        <div class="auth-pill flex items-center gap-4" style="animation-delay:0.3s;">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold"
+               style="font-family:'Rubik',system-ui,sans-serif;background:linear-gradient(135deg,#D7263D,#BE1E34);box-shadow:0 0 12px rgba(215,38,61,0.3);">1</div>
+          <span style="color:#A3BFDB;font-size:14px;font-family:'Nunito Sans',system-ui,sans-serif;">Completa el formulario de registro</span>
         </div>
-        <div class="ml-4 w-px h-4 bg-red-600/30 self-start ml-7"></div>
-        <div class="flex items-center gap-4">
-          <div class="w-8 h-8 rounded-full bg-red-600/30 border border-red-600/50 text-red-300 text-xs font-bold flex items-center justify-center flex-shrink-0"
-               style="font-family:'Rubik',sans-serif;">2</div>
-          <span class="text-slate-400 text-sm" style="font-family:'Nunito Sans',sans-serif;">Inicia sesión con tus credenciales</span>
+        <div class="self-start" style="margin-left:28px;width:1px;height:16px;background:linear-gradient(180deg,rgba(215,38,61,0.4),rgba(215,38,61,0.1));"></div>
+        <div class="auth-pill flex items-center gap-4" style="animation-delay:0.45s;">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold"
+               style="font-family:'Rubik',system-ui,sans-serif;background:rgba(215,38,61,0.15);border:1px solid rgba(215,38,61,0.3);color:#FB7185;">2</div>
+          <span style="color:#5E81A4;font-size:14px;font-family:'Nunito Sans',system-ui,sans-serif;">Inicia sesion con tus credenciales</span>
         </div>
-        <div class="ml-4 w-px h-4 bg-red-600/20 self-start ml-7"></div>
-        <div class="flex items-center gap-4">
-          <div class="w-8 h-8 rounded-full bg-[#1E2433] border border-[#2A3347] text-slate-500 text-xs font-bold flex items-center justify-center flex-shrink-0"
-               style="font-family:'Rubik',sans-serif;">3</div>
-          <span class="text-slate-500 text-sm" style="font-family:'Nunito Sans',sans-serif;">¡Explora y compra sin límites!</span>
+        <div class="self-start" style="margin-left:28px;width:1px;height:16px;background:linear-gradient(180deg,rgba(14,53,85,0.4),rgba(14,53,85,0.1));"></div>
+        <div class="auth-pill flex items-center gap-4" style="animation-delay:0.6s;">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold"
+               style="font-family:'Rubik',system-ui,sans-serif;background:#0A2A44;border:1px solid #0E3555;color:#5E81A4;">3</div>
+          <span style="color:#5E81A4;font-size:14px;font-family:'Nunito Sans',system-ui,sans-serif;">Explora y compra sin limites!</span>
         </div>
       </div>
     </div>
 
-    <p class="absolute bottom-6 text-slate-600 text-xs z-10" style="font-family:'Nunito Sans',sans-serif;">
-      © 2025 La Tienda de Gerardo. Todos los derechos reservados.
+    <p class="absolute bottom-6 text-xs z-10" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#5E81A4;">
+      &copy; 2025 La Tienda de Gerardo. Todos los derechos reservados.
     </p>
   </div>
 
   <!-- ═══════════════════════════════════════════════
        RIGHT PANEL — Registration Form
   ════════════════════════════════════════════════ -->
-  <div class="flex-1 flex flex-col items-center justify-center px-6 py-10 bg-[#0F1117] overflow-y-auto">
+  <div class="flex-1 flex flex-col items-center justify-center px-6 py-10 overflow-y-auto" style="background:#02182B;">
 
     <!-- Mobile logo -->
     <div class="flex flex-col items-center mb-8 lg:hidden">
-      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-red-600/10 border border-red-600/30 mb-3">
-        <svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-3"
+           style="background:rgba(215,38,61,0.1);border:1px solid rgba(215,38,61,0.3);box-shadow:0 0 25px rgba(215,38,61,0.15);">
+        <svg class="w-7 h-7" fill="none" stroke="#FB7185" viewBox="0 0 24 24" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round"
                 d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
         </svg>
       </div>
-      <h2 class="text-xl font-bold text-white" style="font-family:'Rubik',sans-serif;">
-        La Tienda de <span class="text-red-500">Gerardo</span>
+      <h2 class="text-xl font-bold" style="font-family:'Rubik',system-ui,sans-serif;color:#F0F4F8;">
+        La Tienda de <span style="color:#FB7185;">Gerardo</span>
       </h2>
     </div>
 
@@ -98,51 +108,60 @@
 
       <!-- Success message -->
       @if (success()) {
-        <div class="bg-[#161B25] border border-[#2A3347] rounded-2xl p-10 text-center shadow-2xl animate-fade-in">
-          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-500/10 border-2 border-emerald-500/40 mb-6 mx-auto">
-            <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <div class="rounded-2xl p-10 text-center animate-fade-in relative overflow-hidden"
+             style="background:rgba(7,31,55,0.6);border:1px solid rgba(16,185,129,0.2);
+                    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+                    box-shadow:0 25px 50px -12px rgba(2,24,43,0.7);">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 mx-auto"
+               style="background:rgba(16,185,129,0.1);border:2px solid rgba(16,185,129,0.4);
+                      animation: successPulse 1.5s ease-out infinite;">
+            <svg class="w-10 h-10" fill="none" stroke="#34D399" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2" style="font-family:'Rubik',sans-serif;">
-            ¡Cuenta creada!
+          <h3 class="text-2xl font-bold mb-2" style="font-family:'Rubik',system-ui,sans-serif;color:#F0F4F8;">
+            Cuenta creada!
           </h3>
-          <p class="text-slate-400 text-sm mb-6" style="font-family:'Nunito Sans',sans-serif;">
+          <p class="text-sm mb-6" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
             Tu cuenta ha sido registrada correctamente.<br>
-            Redirigiendo al inicio de sesión…
+            Redirigiendo al inicio de sesion...
           </p>
-          <!-- Progress bar -->
-          <div class="w-full bg-[#0F1117] rounded-full h-1.5 overflow-hidden">
-            <div class="h-full bg-emerald-500 rounded-full"
-                 style="animation: progressBar 2s linear forwards;">
-            </div>
+          <div class="w-full rounded-full h-1.5 overflow-hidden" style="background:#0A2A44;">
+            <div class="h-full rounded-full" style="background:linear-gradient(90deg,#10B981,#34D399);animation:progressBar 2s linear forwards;"></div>
           </div>
         </div>
       }
 
       <!-- Registration card -->
       @if (!success()) {
-        <div class="bg-[#161B25] border border-[#2A3347] rounded-2xl p-8 shadow-2xl"
-             style="box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(42,51,71,0.5);">
+        <div class="rounded-2xl p-8 relative overflow-hidden"
+             style="background:rgba(7,31,55,0.6);border:1px solid rgba(30,90,138,0.2);
+                    backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);
+                    box-shadow:0 25px 50px -12px rgba(2,24,43,0.7), inset 0 1px 0 rgba(255,255,255,0.03);">
+
+          <!-- Top accent line -->
+          <div class="absolute top-0 left-8 right-8 h-0.5 rounded-b-full"
+               style="background:linear-gradient(90deg, transparent, #D7263D, transparent);"></div>
 
           <!-- Header -->
           <div class="mb-7">
-            <h2 class="text-2xl font-bold text-white mb-1" style="font-family:'Rubik',sans-serif;">
+            <h2 class="text-2xl font-bold mb-1" style="font-family:'Rubik',system-ui,sans-serif;color:#F0F4F8;">
               Crear cuenta
             </h2>
-            <p class="text-slate-400 text-sm" style="font-family:'Nunito Sans',sans-serif;">
+            <p class="text-sm" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
               Completa los datos para registrarte
             </p>
           </div>
 
           <!-- Error alert -->
           @if (error()) {
-            <div class="flex items-start gap-3 bg-red-600/10 border border-red-600/30 rounded-xl px-4 py-3 mb-6 animate-slide-in">
-              <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <div class="flex items-start gap-3 rounded-xl px-4 py-3 mb-6 animate-slide-in"
+                 style="background:rgba(215,38,61,0.1);border:1px solid rgba(215,38,61,0.25);">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="#FB7185" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                       d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
               </svg>
-              <p class="text-red-400 text-sm leading-relaxed" style="font-family:'Nunito Sans',sans-serif;">
+              <p class="text-sm leading-relaxed" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#FB7185;">
                 {{ error() }}
               </p>
             </div>
@@ -153,199 +172,164 @@
 
             <!-- Nombre completo -->
             <div>
-              <label class="block text-sm font-medium text-slate-300 mb-1.5" style="font-family:'Nunito Sans',sans-serif;">
+              <label class="block text-sm font-medium mb-1.5" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
                 Nombre completo
-                <span class="text-red-500 ml-0.5">*</span>
+                <span style="color:#D7263D;" class="ml-0.5">*</span>
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <svg class="w-4 h-4" fill="none" stroke="#5E81A4" viewBox="0 0 24 24" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                   </svg>
                 </div>
-                <input
-                  type="text"
-                  formControlName="nombre"
-                  placeholder="Gerardo Pérez"
-                  autocomplete="name"
-                  class="input-field pl-10"
-                  [class.border-red-500]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
-                />
+                <input type="text" formControlName="nombre" placeholder="Gerardo Perez" autocomplete="name"
+                  class="input-field pl-10" [class.border-red-500]="form.get('nombre')?.invalid && form.get('nombre')?.touched" />
               </div>
               @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-                <p class="mt-1.5 text-xs text-red-400" style="font-family:'Nunito Sans',sans-serif;">
+                <p class="mt-1.5 text-xs" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#FB7185;">
                   @if (form.get('nombre')?.errors?.['required']) { El nombre es obligatorio. }
-                  @else if (form.get('nombre')?.errors?.['minlength']) { Mínimo 3 caracteres. }
+                  @else if (form.get('nombre')?.errors?.['minlength']) { Minimo 3 caracteres. }
                 </p>
               }
             </div>
 
             <!-- Nombre de usuario -->
             <div>
-              <label class="block text-sm font-medium text-slate-300 mb-1.5" style="font-family:'Nunito Sans',sans-serif;">
+              <label class="block text-sm font-medium mb-1.5" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
                 Nombre de usuario
-                <span class="text-red-500 ml-0.5">*</span>
+                <span style="color:#D7263D;" class="ml-0.5">*</span>
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <svg class="w-4 h-4" fill="none" stroke="#5E81A4" viewBox="0 0 24 24" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" />
                   </svg>
                 </div>
-                <input
-                  type="text"
-                  formControlName="nombre_usuario"
-                  placeholder="gerardo123"
-                  autocomplete="username"
-                  class="input-field pl-10"
-                  [class.border-red-500]="form.get('nombre_usuario')?.invalid && form.get('nombre_usuario')?.touched"
-                />
+                <input type="text" formControlName="nombre_usuario" placeholder="gerardo123" autocomplete="username"
+                  class="input-field pl-10" [class.border-red-500]="form.get('nombre_usuario')?.invalid && form.get('nombre_usuario')?.touched" />
               </div>
               @if (form.get('nombre_usuario')?.invalid && form.get('nombre_usuario')?.touched) {
-                <p class="mt-1.5 text-xs text-red-400" style="font-family:'Nunito Sans',sans-serif;">
+                <p class="mt-1.5 text-xs" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#FB7185;">
                   @if (form.get('nombre_usuario')?.errors?.['required']) { El nombre de usuario es obligatorio. }
-                  @else if (form.get('nombre_usuario')?.errors?.['minlength']) { Mínimo 3 caracteres. }
+                  @else if (form.get('nombre_usuario')?.errors?.['minlength']) { Minimo 3 caracteres. }
                 </p>
               }
             </div>
 
             <!-- Email -->
             <div>
-              <label class="block text-sm font-medium text-slate-300 mb-1.5" style="font-family:'Nunito Sans',sans-serif;">
-                Correo electrónico
-                <span class="text-red-500 ml-0.5">*</span>
+              <label class="block text-sm font-medium mb-1.5" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
+                Correo electronico
+                <span style="color:#D7263D;" class="ml-0.5">*</span>
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <svg class="w-4 h-4" fill="none" stroke="#5E81A4" viewBox="0 0 24 24" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                   </svg>
                 </div>
-                <input
-                  type="email"
-                  formControlName="email"
-                  placeholder="gerardo@ejemplo.com"
-                  autocomplete="email"
-                  class="input-field pl-10"
-                  [class.border-red-500]="form.get('email')?.invalid && form.get('email')?.touched"
-                />
+                <input type="email" formControlName="email" placeholder="gerardo@ejemplo.com" autocomplete="email"
+                  class="input-field pl-10" [class.border-red-500]="form.get('email')?.invalid && form.get('email')?.touched" />
               </div>
               @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                <p class="mt-1.5 text-xs text-red-400" style="font-family:'Nunito Sans',sans-serif;">
+                <p class="mt-1.5 text-xs" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#FB7185;">
                   @if (form.get('email')?.errors?.['required']) { El correo es obligatorio. }
-                  @else if (form.get('email')?.errors?.['email']) { Ingresa un correo válido. }
+                  @else if (form.get('email')?.errors?.['email']) { Ingresa un correo valido. }
                 </p>
               }
             </div>
 
-            <!-- Contraseña -->
+            <!-- Contrasena -->
             <div>
-              <label class="block text-sm font-medium text-slate-300 mb-1.5" style="font-family:'Nunito Sans',sans-serif;">
-                Contraseña
-                <span class="text-red-500 ml-0.5">*</span>
+              <label class="block text-sm font-medium mb-1.5" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
+                Contrasena
+                <span style="color:#D7263D;" class="ml-0.5">*</span>
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <svg class="w-4 h-4" fill="none" stroke="#5E81A4" viewBox="0 0 24 24" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                   </svg>
                 </div>
                 <input
                   [type]="showPassword() ? 'text' : 'password'"
-                  formControlName="contrasena"
-                  placeholder="Mínimo 8 caracteres"
-                  autocomplete="new-password"
-                  class="input-field pl-10 pr-11"
-                  [class.border-red-500]="form.get('contrasena')?.invalid && form.get('contrasena')?.touched"
-                />
-                <!-- Show/hide toggle -->
-                <button
-                  type="button"
-                  (click)="showPassword.set(!showPassword())"
-                  class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300 transition-colors duration-150 focus:outline-none"
-                  [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
-                >
+                  formControlName="contrasena" placeholder="Minimo 8 caracteres" autocomplete="new-password"
+                  class="input-field pl-10 pr-11" [class.border-red-500]="form.get('contrasena')?.invalid && form.get('contrasena')?.touched" />
+                <button type="button" (click)="showPassword.set(!showPassword())"
+                  class="absolute inset-y-0 right-0 pr-3.5 flex items-center transition-colors duration-150 focus:outline-none"
+                  style="color:#5E81A4;"
+                  [attr.aria-label]="showPassword() ? 'Ocultar contrasena' : 'Mostrar contrasena'">
                   @if (!showPassword()) {
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   } @else {
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                     </svg>
                   }
                 </button>
               </div>
-              <!-- Password strength hint -->
               @if (form.get('contrasena')?.value && form.get('contrasena')!.value.length > 0) {
                 <div class="mt-2 flex gap-1.5">
                   @for (i of [1,2,3,4]; track i) {
                     <div class="flex-1 h-1 rounded-full transition-all duration-300"
-                         [class.bg-red-500]="i === 1 && form.get('contrasena')!.value.length < 8"
-                         [class.bg-orange-500]="i <= 2 && form.get('contrasena')!.value.length >= 8 && form.get('contrasena')!.value.length < 10"
-                         [class.bg-yellow-500]="i <= 3 && form.get('contrasena')!.value.length >= 10 && form.get('contrasena')!.value.length < 12"
-                         [class.bg-emerald-500]="i <= 4 && form.get('contrasena')!.value.length >= 12"
-                         [class.bg-[#2A3347]]="(i > 1 && form.get('contrasena')!.value.length < 8) || (i > 2 && form.get('contrasena')!.value.length >= 8 && form.get('contrasena')!.value.length < 10) || (i > 3 && form.get('contrasena')!.value.length >= 10 && form.get('contrasena')!.value.length < 12)">
+                         [style.background]="
+                           (i === 1 && form.get('contrasena')!.value.length < 8) ? '#D7263D' :
+                           (i <= 2 && form.get('contrasena')!.value.length >= 8 && form.get('contrasena')!.value.length < 10) ? '#F59E0B' :
+                           (i <= 3 && form.get('contrasena')!.value.length >= 10 && form.get('contrasena')!.value.length < 12) ? '#FCD34D' :
+                           (i <= 4 && form.get('contrasena')!.value.length >= 12) ? '#10B981' : '#0E3555'
+                         ">
                     </div>
                   }
                 </div>
               }
               @if (form.get('contrasena')?.invalid && form.get('contrasena')?.touched) {
-                <p class="mt-1.5 text-xs text-red-400" style="font-family:'Nunito Sans',sans-serif;">
-                  @if (form.get('contrasena')?.errors?.['required']) { La contraseña es obligatoria. }
-                  @else if (form.get('contrasena')?.errors?.['minlength']) { Mínimo 8 caracteres. }
+                <p class="mt-1.5 text-xs" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#FB7185;">
+                  @if (form.get('contrasena')?.errors?.['required']) { La contrasena es obligatoria. }
+                  @else if (form.get('contrasena')?.errors?.['minlength']) { Minimo 8 caracteres. }
                 </p>
               }
             </div>
 
-            <!-- Teléfono (opcional) -->
+            <!-- Telefono (opcional) -->
             <div>
-              <label class="block text-sm font-medium text-slate-300 mb-1.5" style="font-family:'Nunito Sans',sans-serif;">
-                Teléfono
-                <span class="text-slate-600 text-xs font-normal ml-1">(opcional)</span>
+              <label class="block text-sm font-medium mb-1.5" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
+                Telefono
+                <span class="text-xs font-normal ml-1" style="color:#5E81A4;">(opcional)</span>
               </label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <svg class="w-4 h-4" fill="none" stroke="#5E81A4" viewBox="0 0 24 24" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                   </svg>
                 </div>
-                <input
-                  type="tel"
-                  formControlName="telefono"
-                  placeholder="+57 300 000 0000"
-                  autocomplete="tel"
-                  class="input-field pl-10"
-                />
+                <input type="tel" formControlName="telefono" placeholder="+57 300 000 0000" autocomplete="tel" class="input-field pl-10" />
               </div>
             </div>
 
             <!-- Submit button -->
-            <button
-              type="submit"
-              [disabled]="loading() || form.invalid"
-              class="w-full flex items-center justify-center gap-2.5 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 mt-2 disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:ring-offset-2 focus:ring-offset-[#161B25]"
-              style="font-family:'Nunito Sans',sans-serif; box-shadow: 0 4px 15px rgba(220,38,38,0.25);"
-            >
+            <button type="submit" [disabled]="loading() || form.invalid"
+              class="auth-submit w-full flex items-center justify-center gap-2.5 text-white font-semibold py-3 px-6 rounded-xl mt-2 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+              style="font-family:'Nunito Sans',system-ui,sans-serif;
+                     background:linear-gradient(135deg, #D7263D, #BE1E34);
+                     box-shadow: 0 4px 15px rgba(215,38,61,0.3), 0 0 0 1px rgba(215,38,61,0.2);
+                     transition: transform 0.2s, box-shadow 0.3s;">
               @if (loading()) {
                 <svg class="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <span>Creando cuenta…</span>
+                <span>Creando cuenta...</span>
               } @else {
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
                 </svg>
                 <span>Crear cuenta</span>
               }
@@ -354,46 +338,71 @@
 
           <!-- Divider -->
           <div class="flex items-center gap-4 my-6">
-            <div class="flex-1 h-px bg-[#2A3347]"></div>
-            <span class="text-slate-600 text-xs uppercase tracking-widest" style="font-family:'Nunito Sans',sans-serif;">o</span>
-            <div class="flex-1 h-px bg-[#2A3347]"></div>
+            <div class="flex-1 h-px" style="background:linear-gradient(90deg, transparent, #0E3555, transparent);"></div>
+            <span class="text-xs uppercase tracking-widest" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#5E81A4;">o</span>
+            <div class="flex-1 h-px" style="background:linear-gradient(90deg, transparent, #0E3555, transparent);"></div>
           </div>
 
           <!-- Login link -->
-          <p class="text-center text-slate-400 text-sm" style="font-family:'Nunito Sans',sans-serif;">
-            ¿Ya tienes una cuenta?
-            <a routerLink="/auth/login"
-               class="text-red-400 hover:text-red-300 font-semibold ml-1 transition-colors duration-150 focus:outline-none focus:underline">
-              Iniciar sesión
+          <p class="text-center text-sm" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#A3BFDB;">
+            Ya tienes una cuenta?
+            <a routerLink="/auth/login" class="font-semibold ml-1 transition-colors duration-150 focus:outline-none focus:underline"
+               style="color:#FB7185;">
+              Iniciar sesion
             </a>
           </p>
         </div>
       }
 
-      <!-- Bottom note -->
       @if (!success()) {
-        <p class="text-center text-slate-600 text-xs mt-5" style="font-family:'Nunito Sans',sans-serif;">
-          Los campos marcados con
-          <span class="text-red-500">*</span>
-          son obligatorios.
+        <p class="text-center text-xs mt-5" style="font-family:'Nunito Sans',system-ui,sans-serif;color:#5E81A4;">
+          Los campos marcados con <span style="color:#D7263D;">*</span> son obligatorios.
         </p>
       }
     </div>
   </div>
 </div>
 
-<!-- CSS-only animations -->
 <style>
   @keyframes slideLines {
     0%   { background-position: 0 0; }
     100% { background-position: 56px 56px; }
   }
-  @keyframes breathe {
-    0%, 100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.08; }
-    50%       { transform: translate(-50%, -50%) scale(1.1);  opacity: 0.15; }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 35px rgba(215,38,61,0.15), 0 0 70px rgba(215,38,61,0.05); }
+    50%      { box-shadow: 0 0 50px rgba(215,38,61,0.25), 0 0 90px rgba(215,38,61,0.1); }
+  }
+  @keyframes morphBlob1 {
+    0%   { border-radius: 42% 56% 72% 28% / 42% 42% 56% 56%; transform: translate(0,0) rotate(0deg); }
+    33%  { border-radius: 72% 28% 42% 56% / 56% 72% 28% 42%; transform: translate(10px,-20px) rotate(120deg); }
+    66%  { border-radius: 28% 72% 56% 42% / 72% 28% 42% 56%; transform: translate(-15px,10px) rotate(240deg); }
+    100% { border-radius: 42% 56% 72% 28% / 42% 42% 56% 56%; transform: translate(0,0) rotate(360deg); }
+  }
+  @keyframes morphBlob2 {
+    0%   { border-radius: 56% 42% 28% 72% / 56% 72% 42% 28%; transform: translate(0,0) rotate(0deg); }
+    33%  { border-radius: 28% 72% 56% 42% / 28% 42% 72% 56%; transform: translate(-20px,15px) rotate(-120deg); }
+    66%  { border-radius: 72% 28% 42% 56% / 42% 56% 28% 72%; transform: translate(10px,-10px) rotate(-240deg); }
+    100% { border-radius: 56% 42% 28% 72% / 56% 72% 42% 28%; transform: translate(0,0) rotate(-360deg); }
   }
   @keyframes progressBar {
     from { width: 0%; }
     to   { width: 100%; }
   }
+  @keyframes successPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+    70%  { box-shadow: 0 0 0 15px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  }
+  .auth-content { animation: fadeIn 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+  .auth-pill { animation: pillSlideIn 0.5s cubic-bezier(0.16,1,0.3,1) both; transition: all 0.2s; }
+  .auth-pill:hover { transform: translateX(4px); }
+  @keyframes pillSlideIn {
+    from { opacity: 0; transform: translateX(-20px); filter: blur(4px); }
+    to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+  }
+  .auth-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(215,38,61,0.4), 0 0 0 1px rgba(215,38,61,0.3) !important;
+  }
+  .auth-submit:active:not(:disabled) { transform: translateY(0); }
 </style>

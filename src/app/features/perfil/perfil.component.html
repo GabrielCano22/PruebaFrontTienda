@@ -2,48 +2,48 @@
      PERFIL — Profile page with tabs, dark theme
      ============================================================ -->
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap');
+  
   :root {
-    --bg:#0F1117;--surface:#161B25;--surface2:#1C2333;--border:#2A3347;
-    --red:#DC2626;--red-h:#B91C1C;--text:#E2E8F0;--muted:#64748B;--soft:#94A3B8;
+    --bg:#02182B;--surface:#071F37;--surface2:#0A2A44;--border:#164063;
+    --red:#D7263D;--red-h:#BE1E34;--text:#F0F4F8;--muted:#5E81A4;--soft:#A3BFDB;
   }
-  .prf-page{font-family:'Nunito Sans',sans-serif;color:var(--text);min-height:100%;}
-  .prf-page h1,.prf-page h2,.prf-page h3{font-family:'Rubik',sans-serif;}
+  .prf-page{font-family:'Nunito Sans',system-ui,sans-serif;color:var(--text);min-height:100%;}
+  .prf-page h1,.prf-page h2,.prf-page h3{font-family:'Rubik',system-ui,sans-serif;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   .anim-up{animation:fadeUp .4s cubic-bezier(.4,0,.2,1) both}
   .anim-in{animation:fadeIn .3s ease both}
   .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}
-  .skel{background:linear-gradient(90deg,#1C2333 25%,#222b3a 50%,#1C2333 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px;}
+  .skel{background:linear-gradient(90deg,#0A2A44 25%,#222b3a 50%,#0A2A44 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px;}
   @keyframes shimmer{to{background-position:-200% 0}}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;}
-  .profile-header{background:linear-gradient(135deg,#1C2333,#161B25);border-bottom:1px solid var(--border);padding:32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-  .avatar-lg{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Rubik',sans-serif;font-size:30px;font-weight:800;flex-shrink:0;border:3px solid rgba(220,38,38,.4);}
+  .profile-header{background:linear-gradient(135deg,#0A2A44,#071F37);border-bottom:1px solid var(--border);padding:32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  .avatar-lg{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Rubik',system-ui,sans-serif;font-size:30px;font-weight:800;flex-shrink:0;border:3px solid rgba(215,38,61,.4);}
   .tab-bar{display:flex;border-bottom:1px solid var(--border);}
-  .tab-btn{flex:1;padding:14px 20px;font-family:'Nunito Sans',sans-serif;font-size:14px;font-weight:600;color:var(--muted);background:transparent;border:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .tab-btn{flex:1;padding:14px 20px;font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;font-weight:600;color:var(--muted);background:transparent;border:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;display:flex;align-items:center;justify-content:center;gap:8px;}
   .tab-btn:hover{color:var(--text);background:rgba(255,255,255,.02);}
   .tab-btn.active{color:var(--text);border-bottom-color:var(--red);}
   .tab-content{padding:28px 32px;}
   .form-group{margin-bottom:20px;}
   .form-label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:7px;}
-  .form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nunito Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;box-sizing:border-box;}
+  .form-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nunito Sans',system-ui,sans-serif;font-size:14px;outline:none;transition:border-color .2s;box-sizing:border-box;}
   .form-input:focus{border-color:#3B82F6;}
-  .form-input.is-invalid{border-color:rgba(220,38,38,.6);}
+  .form-input.is-invalid{border-color:rgba(215,38,61,.6);}
   .form-input.password-input{padding-right:48px;}
   .input-wrapper{position:relative;}
   .eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;justify-content:center;transition:color .2s;}
   .eye-btn:hover{color:var(--soft);}
-  .btn-primary{background:var(--red);color:#fff;padding:11px 24px;border-radius:10px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:all .2s;font-family:'Nunito Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;}
+  .btn-primary{background:linear-gradient(135deg, #D7263D, #BE1E34);color:#fff;padding:11px 24px;border-radius:10px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:all .2s;font-family:'Nunito Sans',system-ui,sans-serif;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(215,38,61,0.25);}
   .btn-primary:hover:not(:disabled){background:var(--red-h);}
   .btn-primary:disabled{opacity:.6;cursor:not-allowed;}
   .alert-success{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:12px 16px;color:#86EFAC;font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:20px;}
-  .alert-error{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:10px;padding:12px 16px;color:#F87171;font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+  .alert-error{background:rgba(215,38,61,.1);border:1px solid rgba(215,38,61,.3);border-radius:10px;padding:12px 16px;color:#FB7185;font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:20px;}
   .badge-role{display:inline-flex;align-items:center;padding:3px 12px;border-radius:999px;font-size:12px;font-weight:700;}
-  .badge-admin{background:rgba(220,38,38,.15);color:#F87171;}
+  .badge-admin{background:rgba(215,38,61,.15);color:#FB7185;}
   .badge-cliente{background:rgba(59,130,246,.15);color:#93C5FD;}
   .strength-bar-track{height:5px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:5px;}
   .strength-bar-fill{height:100%;border-radius:999px;transition:width .4s ease,background .4s ease;}
-  .divider{height:1px;background:var(--border);margin:8px 0 22px;}
+  .divider{height:1px;background:linear-gradient(90deg, transparent, #0E3555, transparent);margin:8px 0 22px;}
 </style>
 
 <div class="prf-page" style="background:var(--bg);padding:32px;min-height:100vh;">
@@ -127,7 +127,7 @@
                   [class.is-invalid]="profileForm.get('nombre')?.invalid && profileForm.get('nombre')?.touched"
                   type="text" formControlName="nombre" placeholder="Tu nombre" />
                 @if (profileForm.get('nombre')?.invalid && profileForm.get('nombre')?.touched) {
-                  <p style="font-size:11px;color:#F87171;margin:4px 0 0;">El nombre es requerido</p>
+                  <p style="font-size:11px;color:#FB7185;margin:4px 0 0;">El nombre es requerido</p>
                 }
               </div>
 
@@ -137,7 +137,7 @@
                   [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
                   type="email" formControlName="email" placeholder="tu@email.com" />
                 @if (profileForm.get('email')?.invalid && profileForm.get('email')?.touched) {
-                  <p style="font-size:11px;color:#F87171;margin:4px 0 0;">Ingresa un email válido</p>
+                  <p style="font-size:11px;color:#FB7185;margin:4px 0 0;">Ingresa un email válido</p>
                 }
               </div>
 
@@ -182,7 +182,7 @@
                   </button>
                 </div>
                 @if (passwordForm.get('contrasena_actual')?.invalid && passwordForm.get('contrasena_actual')?.touched) {
-                  <p style="font-size:11px;color:#F87171;margin:4px 0 0;">La contraseña actual es requerida</p>
+                  <p style="font-size:11px;color:#FB7185;margin:4px 0 0;">La contraseña actual es requerida</p>
                 }
               </div>
 
@@ -203,7 +203,7 @@
                   </button>
                 </div>
                 @if (passwordForm.get('nueva_contrasena')?.invalid && passwordForm.get('nueva_contrasena')?.touched) {
-                  <p style="font-size:11px;color:#F87171;margin:4px 0 0;">Mínimo 8 caracteres</p>
+                  <p style="font-size:11px;color:#FB7185;margin:4px 0 0;">Mínimo 8 caracteres</p>
                 }
 
                 <!-- Password strength bar -->
@@ -222,27 +222,27 @@
                     <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
                       <span style="font-size:11px;padding:2px 8px;border-radius:4px;"
                         [style.background]="passwordForm.get('nueva_contrasena')!.value.length >= 8 ? 'rgba(34,197,94,.12)' : 'rgba(100,116,139,.1)'"
-                        [style.color]="passwordForm.get('nueva_contrasena')!.value.length >= 8 ? '#4ADE80' : '#64748B'">
+                        [style.color]="passwordForm.get('nueva_contrasena')!.value.length >= 8 ? '#4ADE80' : '#5E81A4'">
                         8+ chars
                       </span>
                       <span style="font-size:11px;padding:2px 8px;border-radius:4px;"
                         [style.background]="passwordForm.get('nueva_contrasena')!.value.length >= 12 ? 'rgba(34,197,94,.12)' : 'rgba(100,116,139,.1)'"
-                        [style.color]="passwordForm.get('nueva_contrasena')!.value.length >= 12 ? '#4ADE80' : '#64748B'">
+                        [style.color]="passwordForm.get('nueva_contrasena')!.value.length >= 12 ? '#4ADE80' : '#5E81A4'">
                         12+ chars
                       </span>
                       <span style="font-size:11px;padding:2px 8px;border-radius:4px;"
                         [style.background]="/[A-Z]/.test(passwordForm.get('nueva_contrasena')!.value) ? 'rgba(34,197,94,.12)' : 'rgba(100,116,139,.1)'"
-                        [style.color]="/[A-Z]/.test(passwordForm.get('nueva_contrasena')!.value) ? '#4ADE80' : '#64748B'">
+                        [style.color]="/[A-Z]/.test(passwordForm.get('nueva_contrasena')!.value) ? '#4ADE80' : '#5E81A4'">
                         Mayúscula
                       </span>
                       <span style="font-size:11px;padding:2px 8px;border-radius:4px;"
                         [style.background]="/[0-9]/.test(passwordForm.get('nueva_contrasena')!.value) ? 'rgba(34,197,94,.12)' : 'rgba(100,116,139,.1)'"
-                        [style.color]="/[0-9]/.test(passwordForm.get('nueva_contrasena')!.value) ? '#4ADE80' : '#64748B'">
+                        [style.color]="/[0-9]/.test(passwordForm.get('nueva_contrasena')!.value) ? '#4ADE80' : '#5E81A4'">
                         Número
                       </span>
                       <span style="font-size:11px;padding:2px 8px;border-radius:4px;"
                         [style.background]="/[^A-Za-z0-9]/.test(passwordForm.get('nueva_contrasena')!.value) ? 'rgba(34,197,94,.12)' : 'rgba(100,116,139,.1)'"
-                        [style.color]="/[^A-Za-z0-9]/.test(passwordForm.get('nueva_contrasena')!.value) ? '#4ADE80' : '#64748B'">
+                        [style.color]="/[^A-Za-z0-9]/.test(passwordForm.get('nueva_contrasena')!.value) ? '#4ADE80' : '#5E81A4'">
                         Especial
                       </span>
                     </div>
